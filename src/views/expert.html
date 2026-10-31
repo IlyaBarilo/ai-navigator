@@ -1,0 +1,96 @@
+<div id="catalog-workspace" class="workspace-panel">
+  <section class="filter-panel" aria-label="Выбор инструментов"
+    ><div class="filter-top"
+      ><label class="search-box"
+        ><svg class="icon" aria-hidden="true"><use href="#icon-search" /></svg
+        ><input
+          id="search"
+          type="search"
+          autocomplete="off"
+          placeholder="Задача или название сервиса"
+          aria-label="Поиск по задаче или названию сервиса"
+          aria-describedby="search-feedback-text"
+        /><kbd aria-hidden="true">/</kbd></label
+      ><div class="quality-filter rating-filter"
+        ><span class="filter-label" id="quality-label">Качество от</span
+        ><div
+          id="quality-stars"
+          class="rating-scale"
+          role="radiogroup"
+          aria-labelledby="quality-label"
+        ></div
+        ><span id="quality-value" class="rating-value" hidden></span></div
+      ><div class="difficulty-filter rating-filter"
+        ><span class="filter-label" id="difficulty-label">Сложность до</span
+        ><div
+          id="difficulty-filter"
+          class="rating-scale"
+          role="radiogroup"
+          aria-labelledby="difficulty-label"
+        ></div
+        ><span id="difficulty-value" class="rating-value" hidden></span></div></div
+    ><div id="search-feedback" class="search-feedback"
+      ><p id="search-feedback-text" role="status" aria-live="polite"></p
+      ><div id="search-controls" class="search-controls" hidden
+        ><div class="search-task-actions"></div></div></div
+    ><section id="task-picker" class="task-picker" aria-labelledby="task-picker-title"
+      ><div class="task-picker-heading"
+        ><span id="task-picker-title">Задачи</span
+        ><span id="task-selection-label" aria-live="polite">Все задачи</span
+        ><div id="task-legend" class="task-legend" aria-label="Обозначения групп задач"></div></div
+      ><div
+        class="chips"
+        id="type-filters"
+        role="group"
+        aria-label="Задачи и направления работы"
+        aria-describedby="task-picker-hint"
+      ></div
+      ><div class="task-picker-footer"
+        ><button
+          id="task-list-toggle"
+          class="task-list-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="type-filters"
+          ><span>Показать все задачи</span
+          ><svg class="icon" aria-hidden="true"><use href="#icon-chevron" /></svg></button
+        ><span id="task-picker-hint">Поиск охватывает все задачи</span></div
+      ></section
+    ><div class="filter-row group-row"
+      ><span class="filter-label">Доступ</span
+      ><div class="chips" id="group-filters" aria-label="Группы доступа"></div></div
+  ></section>
+  <section id="task-prompts" class="task-prompts" aria-labelledby="prompts-title" hidden
+    ><div class="prompts-heading"
+      ><h2 id="prompts-title">Готовые запросы</h2
+      ><p
+        >Для каждой выбранной задачи — свой пример. Можно скопировать сразу или сначала изменить
+        текст.</p
+      ></div
+    ><div id="prompt-list" class="prompt-grid"></div></section
+  ><section id="catalog" class="catalog-section" aria-labelledby="catalog-title"
+    ><div class="results-bar"
+      ><div
+        ><h2 id="catalog-title">Инструменты</h2
+        ><span id="result-count" role="status" aria-live="polite"></span></div
+      ><div class="result-actions"
+        ><button id="reset" class="reset-button" type="button">Сбросить выбор</button
+        ><label class="sort-label"
+          ><span class="sr-only">Порядок карточек</span
+          ><select id="sort"
+            ><option value="recommended">Рекомендуемый порядок</option
+            ><option value="quality">Сначала качественнее</option
+            ><option value="difficulty">Сначала проще</option
+            ><option value="name">По названию</option></select
+          ></label
+        ></div
+      ></div
+    ><div id="active-summary" class="active-summary"></div><div class="card-grid" id="cards"></div
+    ><div id="empty" class="empty-state" hidden
+      ><svg class="icon" aria-hidden="true"><use href="#icon-search" /></svg
+      ><h3 id="empty-title">Таких сочетаний пока нет</h3
+      ><p id="empty-message">Попробуйте изменить выбранные условия доступа.</p
+      ><button id="empty-reset" class="primary-button">Показать все инструменты</button></div
+    ></section
+  >
+</div>

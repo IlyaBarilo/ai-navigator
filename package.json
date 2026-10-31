@@ -1,0 +1,38 @@
+{
+  "name": "ai-navigator",
+  "version": "0.19.0",
+  "private": true,
+  "type": "module",
+  "description": "Автономный ИИ-навигатор: подбор инструментов по задаче и обучение первому запросу.",
+  "author": {
+    "name": "Барило И.И.",
+    "url": "https://barilo.ru/"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "import:html": "node tools/import-html.mjs",
+    "browser:install": "node tools/install-browser.mjs",
+    "verify": "node tools/verify.mjs",
+    "verify:interface": "node tools/verify-interface.mjs",
+    "verify:typography": "node tools/verify-typography.mjs",
+    "verify:all": "npm run verify && npm run verify:interface && npm run verify:typography && npm run verify:delivery && npm run verify:pages",
+    "check:publication": "node tools/check-publication.mjs",
+    "export:public": "node tools/export-public.mjs",
+    "check:public": "node tools/check-public-files.mjs",
+    "verify:delivery": "node tools/verify-delivery.mjs",
+    "prepare:pages": "node tools/prepare-pages.mjs",
+    "build:pages": "npm run build && npm run prepare:pages",
+    "verify:pages": "node tools/verify-pages.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  },
+  "license": "SEE LICENSE IN NOTICE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IlyaBarilo/ai-navigator.git"
+  }
+}

@@ -1,0 +1,48 @@
+name: Проверки и Pages
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/local/browser-cache
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check:public
+      - run: npm run build
+      - run: npm run verify:all
+      - run: npm run prepare:pages
+      - name: Подготовить файлы сайта
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: local/pages
+  deploy:
+    name: Опубликовать проверенную сборку в Pages
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

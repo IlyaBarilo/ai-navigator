@@ -1,0 +1,653 @@
+/* GENERATED_ASSET: Original fixed Contrast Grid appearance, originally authored for this project.
+   Author-selected geometry and typography with a procedural CSS grid; no third-party assets. */
+html[data-appearance='contrast-grid'] {
+  --ink: #27334e;
+  --muted: #5a6682;
+  --line: #b9c5df;
+  --paper: #ffffff;
+  --teal: #3e57a5;
+  --gold: #90621c;
+  --shadow: none;
+  --skin-bg: #f5f7fc;
+  --skin-soft: #edf0fc;
+  --skin-on-accent: #ffffff;
+  --skin-surface: #ffffff;
+  --skin-font-factor: 1.06;
+  --skin-heading-font: 'Segoe UI', Arial, sans-serif;
+  --skin-heading-weight: 750;
+  --skin-letter-spacing: -0.2px;
+  --skin-card-radius: 4px;
+  --skin-control-radius: 4px;
+  --skin-border-width: 2px;
+  --skin-row-padding: 24px;
+  --skin-card-shadow: none;
+  --skin-blur: none;
+  --skin-background-image:
+    linear-gradient(#3e57a50c 1px, transparent 1px),
+    linear-gradient(90deg, #3e57a50c 1px, transparent 1px);
+  --skin-background-size: 30px 30px;
+  --general-ink: #2b6481;
+  --teaching-ink: #77509c;
+  --task-idle-background: #ffffff;
+  --task-idle-border: #b9c5df;
+  --task-hover-border: #3e57a5;
+  --task-hover-background: #edf0fc;
+  --task-selected-ink: #ffffff;
+  --task-selected-background: #3e57a5;
+  --task-selected-border: #3e57a5;
+  --skin-good-bg: #e5f2e9;
+  --skin-good-ink: #2f6246;
+  --skin-warn-bg: #fff1d6;
+  --skin-warn-ink: #76561d;
+  --skin-local-bg: #e8effc;
+  --skin-local-ink: #345b8b;
+}
+@media screen {
+  html[data-theme='dark'][data-appearance='contrast-grid'] {
+    --ink: #f0f2ff;
+    --muted: #c0c9e1;
+    --line: #6b7fa4;
+    --paper: #242d46;
+    --teal: #b5c2ff;
+    --gold: #dfc18c;
+    --shadow: none;
+    --skin-bg: #171c30;
+    --skin-soft: #313e61;
+    --skin-on-accent: #202b4d;
+    --skin-surface: #242d46;
+    --skin-font-factor: 1.06;
+    --skin-heading-font: 'Segoe UI', Arial, sans-serif;
+    --skin-heading-weight: 750;
+    --skin-letter-spacing: -0.2px;
+    --skin-card-radius: 4px;
+    --skin-control-radius: 4px;
+    --skin-border-width: 2px;
+    --skin-row-padding: 24px;
+    --skin-card-shadow: none;
+    --skin-blur: none;
+    --skin-background-image:
+      linear-gradient(#b5c2ff0c 1px, transparent 1px),
+      linear-gradient(90deg, #b5c2ff0c 1px, transparent 1px);
+    --skin-background-size: 30px 30px;
+    --general-ink: #a4d5ee;
+    --teaching-ink: #d5b9f5;
+    --task-idle-background: #242d46;
+    --task-idle-border: #6b7fa4;
+    --task-hover-border: #b5c2ff;
+    --task-hover-background: #313e61;
+    --task-selected-ink: #202b4d;
+    --task-selected-background: #b5c2ff;
+    --task-selected-border: #b5c2ff;
+    --skin-good-bg: #213e32;
+    --skin-good-ink: #b6dec4;
+    --skin-warn-bg: #493b22;
+    --skin-warn-ink: #f0d49a;
+    --skin-local-bg: #243d59;
+    --skin-local-ink: #b4d3fa;
+  }
+}
+html[data-appearance='contrast-grid'] body {
+  background-size: var(--skin-background-size);
+}
+/* ORIGINAL GENERATED APPLICATION APPEARANCE: procedural CSS, system fonts, no third-party assets. */
+html[data-appearance='contrast-grid'] {
+  --ui-text-base: calc(1.5 * var(--skin-font-factor));
+  --radius: var(--skin-card-radius);
+}
+html[data-appearance='contrast-grid'] body {
+  background-color: var(--skin-bg);
+  background-image: var(--skin-background-image);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+html[data-appearance='contrast-grid'] .backdrop {
+  display: none;
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .simple-workspace h1,
+    .simple-workspace h2,
+    .hero h1,
+    .first-intro h2,
+    .dialog-heading h2,
+    .tool-card h3,
+    .simple-tool-info h2
+  ) {
+  font-family: var(--skin-heading-font);
+  font-weight: var(--skin-heading-weight);
+  letter-spacing: var(--skin-letter-spacing);
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .masthead,
+    .filter-top,
+    .filter-row,
+    .capability,
+    .card-footer,
+    .site-footer,
+    .first-step-actions,
+    .dialog-heading
+  ) {
+  border-color: var(--line);
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .tool-card,
+    .simple-tool-row,
+    .filter-panel,
+    .prompt-card,
+    .task-prompt,
+    .first-lesson-card,
+    .simple-examples-content,
+    .capability-detail,
+    .first-tool-card,
+    .first-followup
+  ) {
+  background: var(--skin-surface);
+  border: var(--skin-border-width) solid var(--line);
+  border-radius: var(--skin-card-radius);
+  box-shadow: var(--skin-card-shadow);
+}
+html[data-appearance='contrast-grid'] .simple-tool-row {
+  padding: var(--skin-row-padding);
+}
+html[data-appearance='contrast-grid'] :is(.tool-card, .simple-tool-row) {
+  backdrop-filter: var(--skin-blur);
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .search-box,
+    #simple-query,
+    .first-fields input,
+    .first-fields select,
+    #first-prompt,
+    .prompt-entry textarea,
+    .sort-label select
+  ) {
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--skin-border-width) solid var(--line);
+  border-radius: var(--skin-control-radius);
+}
+html[data-appearance='contrast-grid'] .search-box input {
+  color: var(--ink);
+  background: transparent;
+}
+html[data-appearance='contrast-grid']
+  :is(#simple-query, .search-box input, .first-fields input)::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .chip,
+    .secondary-button,
+    .theme-toggle,
+    .text-size-toggle,
+    .workspace-nav > button,
+    .first-steps button,
+    .first-task-choices button,
+    .simple-example-button,
+    .search-task-action,
+    .copy-prompt,
+    .icon-button
+  ) {
+  color: var(--ink);
+  background: var(--paper);
+  border-color: var(--line);
+  border-width: var(--skin-border-width);
+  border-radius: var(--skin-control-radius);
+  box-shadow: none;
+}
+html[data-appearance='contrast-grid']
+  :is(.theme-toggle, .text-size-toggle, .secondary-button, .workspace-nav > button) {
+  background: var(--skin-soft);
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .primary-button,
+    .chip[aria-pressed='true'],
+    .chip[aria-checked='true'],
+    .workspace-nav > button[aria-pressed='true'],
+    .first-steps button.active
+  ) {
+  color: var(--skin-on-accent);
+  background: var(--teal);
+  border-color: var(--teal);
+  border-radius: var(--skin-control-radius);
+}
+html[data-appearance='contrast-grid'] .first-task-choices [aria-checked='true'],
+html[data-appearance='contrast-grid'] .first-tool-card [aria-checked='true'] {
+  background: var(--skin-soft);
+  border-color: var(--teal);
+  box-shadow: inset 0 0 0 1px var(--teal);
+  color: var(--ink);
+}
+html[data-appearance='contrast-grid']
+  .type-chip[data-task-group='general']:not([aria-pressed='true']) {
+  color: var(--general-ink);
+  background: var(--paper);
+}
+html[data-appearance='contrast-grid']
+  .type-chip[data-task-group='teaching']:not([aria-pressed='true']) {
+  color: var(--teaching-ink);
+  background: var(--paper);
+}
+html[data-appearance='contrast-grid'] .simple-task-hint {
+  color: var(--general-ink);
+}
+html[data-appearance='contrast-grid'] .simple-task-hint[data-group='teaching'] {
+  color: var(--teaching-ink);
+}
+html[data-appearance='contrast-grid']
+  :is(.simple-access-buttons .chip, .first-task-choices button, .simple-example-button):hover {
+  border-color: var(--teal);
+}
+html[data-appearance='contrast-grid'] .simple-example-button:hover {
+  background: var(--skin-soft);
+  color: var(--ink);
+}
+html[data-appearance='contrast-grid'] .rf-check {
+  border-color: var(--line);
+}
+html[data-appearance='contrast-grid'] .chip.rf-switch[aria-pressed='true'] {
+  background: var(--skin-soft);
+  border-color: var(--teal);
+  color: var(--teal);
+}
+html[data-appearance='contrast-grid'] .chip.rf-switch[aria-pressed='true'] .rf-check {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--skin-on-accent);
+}
+html[data-appearance='contrast-grid'] .access-tag {
+  background: var(--skin-soft);
+  color: var(--muted);
+}
+html[data-appearance='contrast-grid'] .access-tag.online-free {
+  background: var(--skin-good-bg);
+  color: var(--skin-good-ink);
+}
+html[data-appearance='contrast-grid'] .access-tag.local {
+  background: var(--skin-local-bg);
+  color: var(--skin-local-ink);
+}
+html[data-appearance='contrast-grid']
+  :is(.availability-unknown, .access-tag.rf-limited, .access-tag.online-paid) {
+  background: var(--skin-warn-bg);
+  color: var(--skin-warn-ink);
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .card-description,
+    .capability small,
+    .active-summary,
+    .filter-label,
+    .card-difficulty,
+    .detail-difficulty,
+    .details-button,
+    .reset-button,
+    .first-progress
+  ) {
+  color: var(--muted);
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .open-link,
+    .eyebrow,
+    .task-selection-label,
+    .source-links a,
+    .help-link:hover,
+    .simple-text-button
+  ) {
+  color: var(--teal);
+}
+html[data-appearance='contrast-grid'] .extra-capability {
+  color: var(--general-ink);
+  background: var(--skin-soft);
+  border-color: var(--line);
+  border-radius: var(--skin-control-radius);
+}
+html[data-appearance='contrast-grid'] .extra-capability:hover {
+  border-color: var(--teal);
+  background: var(--paper);
+}
+html[data-appearance='contrast-grid'] dialog {
+  color: var(--ink);
+  background: var(--paper);
+  border-color: var(--line);
+  border-radius: var(--skin-card-radius);
+}
+html[data-appearance='contrast-grid'] .dialog-heading {
+  background: var(--paper);
+}
+html[data-appearance='contrast-grid']
+  :is(.rating-box, .hardware, .detail-reliability, .first-result) {
+  background: var(--skin-soft);
+  color: var(--ink);
+  border-color: var(--line);
+}
+html[data-appearance='contrast-grid']
+  :is(button, a, input, select, textarea, summary):focus-visible {
+  outline-color: var(--teal);
+}
+html[data-appearance='contrast-grid']
+  :is(.simple-tool-description, .simple-access-help, .simple-rf-help, .simple-results-note) {
+  color: var(--ink);
+}
+/* Original shared application navigation: existing controls keep their listeners and state. */
+.display-controls {
+  flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+}
+.display-controls > .workspace-nav {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin: 0;
+  min-width: 0;
+}
+.display-controls > .workspace-nav > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  min-height: 34px;
+  padding: 6px 9px;
+  line-height: 1.2;
+  font-size: max(12px, calc(11px * var(--ui-text-base) * var(--ui-text-scale)));
+  white-space: nowrap;
+}
+.rf-filter-row {
+  display: flex;
+  align-items: center;
+  flex: 1 0 100%;
+  min-width: 0;
+  max-width: 100%;
+  order: 10;
+}
+.rf-filter-row > .rf-switch {
+  margin-left: 0;
+  max-width: 100%;
+}
+/* The simple overview keeps the total prominent and the matching prefix smaller. */
+.simple-learning {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.simple-catalog-count {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin-left: auto;
+  color: var(--teal);
+  font-variant-numeric: tabular-nums;
+}
+.simple-count-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+#simple-total-tools {
+  font-size: calc(44px * var(--ui-text-base) * var(--ui-text-scale));
+  font-weight: 600;
+}
+#simple-matching-tools {
+  font-size: calc(22px * var(--ui-text-base) * var(--ui-text-scale));
+  font-weight: 400;
+}
+.simple-count-label {
+  font-size: calc(11px * var(--ui-text-base) * var(--ui-text-scale));
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+/* Keep selected access groups in the approved palette, including the dark theme. */
+html[data-appearance='contrast-grid']
+  .simple-access-buttons
+  [data-simple-access][aria-pressed='true'] {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--skin-on-accent);
+}
+
+#simple-matching-number {
+  font-size: calc(28px * var(--ui-text-base) * var(--ui-text-scale));
+  font-weight: 400;
+}
+
+/* The three sequential steps share the same visual heading level. */
+html[data-appearance='contrast-grid'] :is(#simple-title-1, #simple-title-2, #simple-title-3) {
+  font-weight: var(--skin-heading-weight);
+  letter-spacing: var(--skin-letter-spacing);
+}
+
+/* GENERATED_ASSET: Original role-based typography originally authored for this project.
+   Comparable controls share tokens; page titles, sections and supporting text retain hierarchy. */
+html[data-appearance='contrast-grid'] {
+  --type-section: calc(18px * var(--ui-text-base) * var(--ui-text-scale));
+  --type-subheading: calc(16px * var(--ui-text-base) * var(--ui-text-scale));
+  --type-action: calc(13px * var(--ui-text-base) * var(--ui-text-scale));
+  --type-control: calc(12px * var(--ui-text-base) * var(--ui-text-scale));
+  --type-header: max(12px, calc(11px * var(--ui-text-base) * var(--ui-text-scale)));
+  --type-button-weight: 600;
+}
+html[data-appearance='contrast-grid']
+  :is(
+    #simple-title-1,
+    #simple-title-2,
+    #simple-title-3,
+    .results-bar h2,
+    .prompts-heading h2,
+    .lesson-step h3,
+    .empty-state h3,
+    .data-error h2
+  ) {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-section);
+  font-weight: var(--skin-heading-weight);
+  line-height: 1.4;
+  letter-spacing: var(--skin-letter-spacing);
+}
+html[data-appearance='contrast-grid'] :is(.tool-card h3, .simple-tool-info h2) {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-section);
+  font-weight: var(--skin-heading-weight);
+  line-height: 1.3;
+  letter-spacing: var(--skin-letter-spacing);
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .capability-detail h3,
+    .help-body h3,
+    .prompt-heading h3,
+    .simple-workspace .simple-example-group h3
+  ) {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-subheading);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: var(--skin-letter-spacing);
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .primary-button,
+    .secondary-button,
+    .open-link,
+    .simple-workspace .primary-button,
+    .simple-workspace .secondary-button,
+    .lesson-step .primary-button,
+    .lesson-step .secondary-button
+  ) {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-action);
+  font-weight: var(--type-button-weight);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+html[data-appearance='contrast-grid'] :is(.chip, .simple-access-buttons .chip, .group-row .chip) {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-control);
+  font-weight: var(--type-button-weight);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+html[data-appearance='contrast-grid'] .type-chip.search-match:not([aria-pressed='true']) {
+  font-weight: 750;
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .details-button,
+    .simple-text-button,
+    .simple-tool-actions .simple-text-button,
+    .copy-prompt,
+    .search-task-action,
+    .task-list-toggle,
+    .reset-button
+  ) {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-control);
+  font-weight: var(--type-button-weight);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+html[data-appearance='contrast-grid']
+  :is(
+    .display-controls .theme-toggle,
+    .display-controls .text-size-toggle,
+    .display-controls .workspace-nav > button
+  ) {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-header);
+  font-weight: var(--type-button-weight);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+html[data-appearance='contrast-grid'] .first-steps button {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-control);
+  font-weight: var(--type-button-weight);
+  line-height: 1.5;
+}
+html[data-appearance='contrast-grid'] :is(.first-task-choices button, .first-tool-card button) {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-action);
+  line-height: 1.5;
+}
+html[data-appearance='contrast-grid'] :is(.first-task-choices b, .first-tool-card b) {
+  font-size: calc(14px * var(--ui-text-base) * var(--ui-text-scale));
+  font-weight: 700;
+  line-height: 1.4;
+}
+html[data-appearance='contrast-grid'] :is(.first-task-choices span, .first-tool-card span) {
+  font-size: var(--type-control);
+  font-weight: 400;
+  line-height: 1.5;
+}
+html[data-appearance='contrast-grid'] .simple-count-label {
+  font-size: calc(14px * var(--ui-text-base) * var(--ui-text-scale));
+  text-align: right;
+  flex-shrink: 0;
+}
+.simple-catalog-count {
+  row-gap: 4px;
+  text-align: right;
+}
+@media (max-width: 600px) {
+  .training-label-tail {
+    display: block;
+  }
+  .simple-learning > .secondary-button {
+    max-width: 100%;
+    text-align: center;
+  }
+  .simple-catalog-count {
+    justify-content: flex-end;
+  }
+  .simple-count-label {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 780px) {
+  html[data-appearance='contrast-grid'] .first-steps button {
+    font-size: calc(10px * var(--ui-text-base) * var(--ui-text-scale));
+  }
+}
+
+html[data-appearance='contrast-grid'] .help-link {
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-header);
+  font-weight: var(--type-button-weight);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+@media (max-width: 780px) {
+  html[data-appearance='contrast-grid'] .help-link {
+    font-size: 0;
+  }
+}
+
+/* The product wordmark is one hyphenated name. */
+.brand-light {
+  margin-left: 0;
+}
+
+.legal-notices {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+.legal-notices pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+.legal-notices summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.6rem 0;
+}
+.release-info {
+  margin-top: 1rem;
+}
+
+.legal-link {
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  max-width: 100%;
+  min-width: 0;
+  color: var(--muted);
+  font-family: var(--skin-heading-font);
+  font-size: var(--type-control);
+  font-weight: var(--type-button-weight);
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.legal-link:hover {
+  color: var(--teal);
+}
+#legal-dialog .legal-notices {
+  border: 0;
+  padding-top: 0;
+  margin-top: 0;
+}

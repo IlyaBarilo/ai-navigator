@@ -1,0 +1,559 @@
+/* Original shared rating controls: identical state frames, distinct task symbols. */
+.rating-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-width: 0;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.rating-filter > .filter-label {
+  font-size: calc(11px * var(--ui-text-base) * var(--ui-text-scale));
+  margin: 0;
+  line-height: 1.5;
+}
+.rating-filter #quality-stars,
+.rating-filter #difficulty-filter {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.rating-filter .rating-any {
+  min-height: 28px;
+  font-size: calc(11px * var(--ui-text-base) * var(--ui-text-scale));
+  line-height: 1.35;
+  font-weight: 600;
+  padding: 4px 8px;
+  margin: 0 5px 0 0;
+  border: 1px solid #c5d5dd;
+  border-radius: 6px;
+  color: var(--muted);
+  background: transparent;
+}
+.rating-filter .rating-any[aria-checked='true'] {
+  border: 1px solid #6597a2;
+  background: #edf5f6;
+  color: #285e6b;
+  box-shadow: inset 0 0 0 1px #6597a21a;
+  outline: none;
+}
+.rating-filter .rating-choice {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 30px;
+  min-width: 25px;
+  padding: 1px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  line-height: 1;
+  transform: none;
+}
+.rating-filter .rating-any:hover {
+  border-color: #9ab9c4;
+}
+.rating-filter .rating-choice:focus-visible,
+.rating-filter .rating-any:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+.rating-filter > .rating-value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(11px * var(--ui-text-base) * var(--ui-text-scale));
+  font-weight: 600;
+  line-height: 1.35;
+  color: #285e6b;
+  min-width: 34px;
+  min-height: 28px;
+  width: auto;
+  padding: 4px 7px;
+  border: 1px solid #c5d5dd;
+  border-radius: 6px;
+  background: #f2f7f8;
+  white-space: nowrap;
+}
+@media (max-width: 780px) {
+  .rating-filter {
+    width: 100%;
+    gap: 7px;
+  }
+}
+@media (max-width: 380px) {
+  html:is([data-text-scale='100'], [data-text-scale='120'], [data-text-scale='150'])
+    .rating-filter
+    > .filter-label {
+    flex-basis: 100%;
+  }
+}
+@media screen {
+  html[data-theme='dark'] .rating-filter .rating-any {
+    border-color: #476575;
+    color: #b4c9d6;
+    background: transparent;
+  }
+  html[data-theme='dark'] .rating-filter .rating-any[aria-checked='true'] {
+    border-color: #7eabb6;
+    background: #294a55;
+    color: #d5ebee;
+    box-shadow: inset 0 0 0 1px #7eabb61a;
+  }
+  html[data-theme='dark'] .rating-filter > .rating-value {
+    border-color: #476575;
+    background: #203b49;
+    color: #d5ebee;
+  }
+}
+/* Original responsive header and font calibration variables. */
+:root {
+  --ui-text-base: 1.5;
+  --ui-text-scale: 1;
+}
+.masthead {
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.display-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.display-controls .theme-toggle {
+  margin-left: 0;
+}
+.masthead .author {
+  max-width: 270px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.masthead .author small {
+  white-space: normal;
+  flex-wrap: wrap;
+}
+.hero .hero-note > .hero-count {
+  flex-wrap: wrap;
+}
+.hero-count #matching-tools {
+  white-space: nowrap;
+}
+.capability {
+  grid-template-columns: 17px minmax(0, 1fr) auto;
+}
+.cap-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.card-footer {
+  flex-wrap: wrap;
+}
+.details-button {
+  max-width: 100%;
+  min-width: 0;
+}
+.open-link {
+  margin-left: auto;
+}
+@media (max-width: 780px) {
+  .masthead {
+    gap: 10px;
+  }
+  .display-controls {
+    gap: 6px;
+  }
+}
+@media (max-width: 620px) {
+  .masthead .author {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    max-width: none;
+    text-align: left;
+  }
+  .masthead .author small {
+    margin: 0 0 0 auto;
+  }
+  .masthead .help-link {
+    margin-left: 0;
+  }
+}
+@media (max-width: 540px) {
+}
+@media print {
+  :root {
+    --ui-text-scale: 1 !important;
+  }
+}
+
+.text-size-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+  min-width: 74px;
+  min-height: 34px;
+  padding: 6px 9px;
+  border: 1px solid #cddce3;
+  border-radius: 9px;
+  background: #ffffffba;
+  color: #476c7d;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.text-size-toggle:hover {
+  border-color: #8baebd;
+  background: #fff;
+}
+.text-size-mark {
+  font-weight: 650;
+  letter-spacing: -0.5px;
+}
+.rating-filter .difficulty-button {
+  font-size: 22px;
+}
+.rating-filter .difficulty-button.filled {
+  color: #396d81;
+}
+@media screen {
+  html[data-theme='dark'] .text-size-toggle {
+    background: #1b3142;
+    border-color: #3b5668;
+    color: #d0e4ef;
+  }
+  html[data-theme='dark'] .text-size-toggle:hover {
+    background: #253f50;
+    border-color: #62879b;
+  }
+  html[data-theme='dark'] .rating-filter .difficulty-button.filled {
+    color: #a6d1df;
+  }
+}
+@media print {
+  .display-controls {
+    display: none !important;
+  }
+}
+
+/* Larger text gets room for full lesson choices and step labels on narrow screens. */
+.first-task-choices button {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 540px) {
+  html:is(
+      [data-text-scale='75'],
+      [data-text-scale='100'],
+      [data-text-scale='120'],
+      [data-text-scale='150']
+    )
+    .first-steps {
+    grid-template-columns: repeat(auto-fit, minmax(82px, 1fr));
+  }
+  html:is([data-text-scale='100'], [data-text-scale='120'], [data-text-scale='150'])
+    .first-task-choices {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Counter stays on one baseline; descriptive labels sit underneath. */
+.hero .hero-note {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  width: max-content;
+  min-width: 0;
+  flex: 0 0 auto;
+  text-align: right;
+}
+.hero .hero-note > .hero-count {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  align-items: baseline;
+}
+.hero .hero-note > div:last-child {
+  flex: 0 0 auto;
+  max-width: 220px;
+}
+.rating-filter .rating-choice[aria-checked='true'] {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}
+.rating-filter .rating-choice:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+.rating-filter .star-button.filled {
+  color: var(--gold);
+}
+@media (max-width: 540px) {
+  html:is([data-text-scale='100'], [data-text-scale='120'], [data-text-scale='150']) .hero {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  html:is([data-text-scale='100'], [data-text-scale='120'], [data-text-scale='150'])
+    .hero
+    .hero-note {
+    align-self: flex-end;
+  }
+}
+
+/* The largest relative scale is 225% of the original typography. */
+.hero h1 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.tool-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.card-difficulty,
+.result-actions {
+  flex-wrap: wrap;
+}
+.sort-label {
+  min-width: 0;
+  max-width: 100%;
+}
+.sort-label select {
+  min-width: 0;
+  max-width: 100%;
+}
+@media (max-width: 540px) {
+  html:is([data-text-scale='120'], [data-text-scale='150']) .first-steps {
+    grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  }
+}
+
+.results-bar > div:first-child {
+  flex-wrap: wrap;
+}
+.results-bar h2 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+#result-count {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.dialog-heading > div {
+  min-width: 0;
+}
+.dialog-heading h2,
+.dialog-body {
+  overflow-wrap: anywhere;
+}
+
+.first-request {
+  overflow-wrap: anywhere;
+}
+.first-checks label,
+.first-checks label span {
+  min-width: 0;
+}
+
+/* Keep a usable search field when selected rating values need another row. */
+.filter-top {
+  flex-wrap: wrap;
+}
+.search-box {
+  flex: 1 1 260px;
+}
+@media (max-width: 780px) {
+  .filter-top .search-box {
+    flex-basis: 100%;
+  }
+}
+
+/* Compact top: use horizontal inventory notes when there is enough room. */
+.hero {
+  padding: 12px 0 10px;
+}
+.workspace-nav {
+  margin-bottom: 12px;
+}
+@media (min-width: 1100px) {
+  .hero .hero-note {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero .hero-note > div:last-child {
+    max-width: 180px;
+    text-align: left;
+  }
+}
+@media (min-width: 621px) {
+  .masthead {
+    min-height: 76px;
+  }
+  .masthead .author {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 12px;
+    max-width: none;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .masthead .author .author-name {
+    white-space: nowrap;
+  }
+  .masthead .author small {
+    margin: 0;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+}
+
+/* Alignment uses the actual text size instead of a fixed line box. */
+.first-steps button > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: max(25px, 1.65em);
+  block-size: max(25px, 1.65em);
+  line-height: 1;
+  padding: 0;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.display-controls {
+  align-items: stretch;
+}
+.display-controls > button {
+  align-self: stretch;
+  height: auto;
+  min-height: 34px;
+  line-height: 1.2;
+}
+.display-controls .theme-toggle {
+  min-width: 34px;
+}
+/* Inventory labels remain readable in both the catalog and training views. */
+.hero .hero-note > div:last-child {
+  font-size: calc(14px * var(--ui-text-base) * var(--ui-text-scale));
+  max-width: 16ch;
+}
+.hero-note b {
+  display: block;
+  font-size: calc(14px * var(--ui-text-base) * var(--ui-text-scale));
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
+}
+.hero-note #hero-match-hint {
+  font-size: calc(12px * var(--ui-text-base) * var(--ui-text-scale));
+  line-height: 1.4;
+  margin: 0.35em 0 0;
+}
+
+/* Keep companion lesson actions equal within each wrapped row. */
+.lesson-step .primary-button,
+.lesson-step .secondary-button {
+  padding-block: 10px;
+}
+.first-form-actions,
+.first-step-actions,
+.first-open-row {
+  align-items: stretch;
+}
+
+/* Shared vector size: star and diamond geometry have similar visible bounds. */
+.rating-filter {
+  --rating-slot: 28px;
+  --rating-symbol: 24px;
+}
+.rating-filter .rating-choice {
+  width: var(--rating-slot);
+  min-width: var(--rating-slot);
+  height: 32px;
+  padding: 0;
+}
+.rating-filter .rating-choice > .icon {
+  width: var(--rating-symbol);
+  height: var(--rating-symbol);
+  stroke-width: 1.3;
+  fill: none;
+}
+.rating-filter .difficulty-button.filled > .icon {
+  fill: currentColor;
+}
+.mini-rating .icon,
+.difficulty-symbols .icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.3;
+}
+.difficulty-symbols {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  line-height: 1;
+}
+.difficulty-symbols .icon {
+  fill: none;
+}
+.difficulty-symbols .icon.filled {
+  fill: currentColor;
+}
+@media (max-width: 360px) {
+  .rating-filter {
+    --rating-slot: 28px;
+    --rating-symbol: 24px;
+  }
+}
+/* The RF tick is independent of text zoom and centered inside its fixed frame. */
+.rf-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 18px;
+  block-size: 18px;
+  min-width: 18px;
+  flex: 0 0 18px;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1;
+}
+.task-picker .type-chip[aria-pressed='true']::before {
+  flex: 0 0 max(16px, 1.1em);
+  width: max(16px, 1.1em);
+  font-size: inherit;
+  line-height: 1;
+}
+/* Native self-check boxes align with the first text line, also when it wraps. */
+.first-checks input {
+  font: inherit;
+  width: max(16px, 1em);
+  height: max(16px, 1em);
+  margin: calc((1.6em - max(16px, 1em)) / 2) 0 0;
+}
+
+.rating-filter .star-button.filled > .icon {
+  fill: currentColor;
+}
+
+/* Common typography for the two display controls, legible at the smallest scale. */
+.display-controls > button {
+  font-size: max(12px, calc(11px * var(--ui-text-base) * var(--ui-text-scale)));
+}

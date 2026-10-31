@@ -1,0 +1,42 @@
+name: Выпуск
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: release
+    permissions:
+      contents: write
+    env:
+      AI_NAVIGATOR_RELEASE_TAG: ${{ github.event.release.tag_name }}
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/local/browser-cache
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Проверить тег и исходный commit
+        run: node tools/check-release-ref.mjs
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check:public
+      - run: npm run build
+      - run: npm run verify:all
+      - run: node tools/prepare-release.mjs
+      - name: Прикрепить проверенные файлы
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload "$AI_NAVIGATOR_RELEASE_TAG" local/release/ai-navigator.html "local/release/ai-navigator-${AI_NAVIGATOR_RELEASE_TAG#v}.html" local/release/SHA256SUMS.txt

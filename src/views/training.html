@@ -1,0 +1,215 @@
+<section
+  id="first-request"
+  class="workspace-panel first-request"
+  hidden
+  aria-labelledby="first-title"
+>
+  <div class="first-intro"
+    ><div
+      ><div class="eyebrow">Начните с небольшой учебной задачи</div
+      ><h2 id="first-title">Первый запрос к ИИ</h2
+      ><p
+        >Подготовьте запрос здесь, получите ответ в отдельной вкладке с ИИ и вернитесь к
+        обучению.</p
+      ></div
+    ><span id="first-progress" class="first-progress" role="status"></span
+  ></div>
+  <nav id="first-steps" class="first-steps" aria-label="Шаги первого запроса"></nav>
+  <div class="first-lesson-card">
+    <section class="lesson-step" data-first-step="1" aria-labelledby="first-step-1-title"
+      ><h3 id="first-step-1-title" tabindex="-1">1. Опишите свой урок</h3
+      ><p id="first-defaults-hint"
+        >Выберите задачу, предмет, класс и тему. Можно сразу нажать «Подготовить запрос»: пустые
+        поля заполнятся значениями из примера.</p
+      ><div
+        id="first-task-choices"
+        class="first-task-choices"
+        role="radiogroup"
+        aria-label="Учебная задача"
+      ></div
+      ><form id="first-form"
+        ><div class="first-fields"
+          ><label>Предмет<select id="first-subject"></select></label
+          ><label id="first-custom-wrap" hidden
+            >Название предмета<input
+              id="first-custom-subject"
+              maxlength="80"
+              aria-describedby="first-defaults-hint"
+              autocomplete="off" /></label
+          ><label>Класс<select id="first-grade"></select></label
+          ><label class="first-topic-label"
+            >Тема урока<input
+              id="first-topic"
+              maxlength="200"
+              aria-describedby="first-defaults-hint"
+              autocomplete="off" /></label></div
+        ><div class="first-form-actions"
+          ><button id="first-example" type="button" class="secondary-button"
+            >Заполнить пример</button
+          ><button type="submit" class="primary-button">Подготовить запрос →</button></div
+        ></form
+      ></section
+    >
+    <section class="lesson-step" data-first-step="2" hidden aria-labelledby="first-step-2-title"
+      ><h3 id="first-step-2-title" tabindex="-1">2. Подготовьте запрос</h3
+      ><p
+        >Запрос — это задание, которое вы отправляете ИИ. Текст уже учитывает ваш предмет, класс и
+        тему; его можно изменить.</p
+      ><label class="first-prompt-label" for="first-prompt">Ваш текст для ИИ</label
+      ><textarea id="first-prompt" rows="1" spellcheck="false"></textarea
+      ><div class="first-copy-row"
+        ><button type="button" class="primary-button" data-first-copy="main"
+          >Скопировать запрос</button
+        ><span id="first-copy-status" role="status" aria-live="polite"></span></div
+      ><p class="first-tip"
+        >Нажмите «Скопировать запрос», затем «Выбрать чат →». Копирование подготовит текст для
+        вставки; отправлять его вы будете в выбранном сервисе.</p
+      ><div class="first-step-actions"
+        ><button type="button" class="secondary-button" data-first-go="1">← К параметрам</button
+        ><button type="button" class="primary-button" data-first-go="3">Выбрать чат →</button></div
+      ></section
+    >
+    <section class="lesson-step" data-first-step="3" hidden aria-labelledby="first-step-3-title"
+      ><h3 id="first-step-3-title" tabindex="-1">3. Отправьте запрос в чат</h3
+      ><p
+        >Выберите один из сервисов ниже. Затем выполните действия 1 и 2. Для работы с чатом
+        понадобится интернет.</p
+      ><div
+        id="first-tools"
+        class="first-tools"
+        role="radiogroup"
+        aria-label="Чат для первого запроса"
+      ></div
+      ><div class="first-open-row"
+        ><button type="button" class="secondary-button" data-first-copy="main"
+          >1. Скопировать запрос</button
+        ><a
+          id="first-open-chat"
+          class="primary-button"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="first-open-help"
+          >2. Открыть чат ↗</a
+        ></div
+      ><span id="first-chat-copy-status" role="status"></span
+      ><p id="first-open-help" class="first-tip"
+        >Чат откроется в отдельной вкладке браузера. Вкладку «ИИ-навигатор» оставьте открытой: после
+        ответа вернитесь сюда. Кнопка «Ответ получен →» находится внизу этого шага.</p
+      ><div class="first-chat-guide"
+        ><div
+          ><h4>С чего начать: <span data-first-chat-name></span></h4
+          ><ol
+            ><li data-first-service-step="0"></li
+            ><li data-first-service-step="1"></li
+            ><li
+              >Вставьте скопированный запрос: <kbd>Ctrl</kbd> + <kbd>V</kbd> на компьютере (<kbd
+                >⌘</kbd
+              >
+              + <kbd>V</kbd> на Mac). На телефоне удерживайте поле и выберите «Вставить».</li
+            ><li
+              >После вставки текста нажмите стрелку отправки рядом с полем сообщения и дождитесь
+              ответа ИИ.</li
+            ></ol
+          ></div
+        ><!-- GENERATED_ASSET: first-request-chat-schematic. Original educational HTML/CSS originally authored for this project; no third-party UI or logo reproduced. --><figure
+          class="first-chat-scheme"
+          ><figcaption><b>Учебная схема</b><span>Элементы окна чата</span></figcaption
+          ><div class="scheme-answer"
+            ><b>Область ответа ИИ</b><span>Текст, который создаст выбранный сервис</span></div
+          ><div class="scheme-input"
+            ><span
+              ><b>Поле вашего запроса</b><small>Область для сообщения в открытом чате</small></span
+            ><span class="scheme-send-note">Отправка ↑</span></div
+          ><small class="scheme-note"
+            >Иллюстрация для пояснения. Вводите и отправляйте запрос в выбранном сервисе, открытом в
+            отдельной вкладке.</small
+          ></figure
+        ></div
+      ><aside class="first-return-note" aria-labelledby="first-return-title"
+        ><h4 id="first-return-title">Как вернуться после ответа</h4
+        ><p
+          >Вверху браузера выберите вкладку «ИИ-навигатор». На телефоне откройте список вкладок и
+          выберите эту страницу. Здесь нажмите «Ответ получен →».</p
+        ></aside
+      ><details class="first-trouble"
+        ><summary>Если не получилось открыть чат или вставить запрос</summary
+        ><ul
+          ><li
+            >Сервис не открывается или не удаётся войти: вернитесь сюда и выберите второй
+            сервис.</li
+          ><li
+            >Вставка не сработала: вернитесь сюда, нажмите «1. Скопировать запрос», затем снова
+            нажмите поле сообщения в сервисе и выберите «Вставить».</li
+          ><li
+            >Нужна помощь со входом: под карточкой каждого сервиса есть ссылка «Официальная
+            инструкция».</li
+          ></ul
+        ></details
+      ><div class="first-step-actions"
+        ><button type="button" class="secondary-button" data-first-go="2">← К запросу</button
+        ><button type="button" class="primary-button" data-first-go="4"
+          >Ответ получен →</button
+        ></div
+      ></section
+    >
+    <section class="lesson-step" data-first-step="4" hidden aria-labelledby="first-step-4-title"
+      ><h3 id="first-step-4-title" tabindex="-1">4. Уточните ответ</h3
+      ><p
+        >Выберите одно уточнение ниже — для первого опыта этого достаточно. Скопируйте его, затем
+        вернитесь во вкладку с сервисом <b data-first-chat-name></b>. Вставьте текст в тот же
+        разговор, где вы получили первый ответ: так ИИ будет знать, к чему относится уточнение.</p
+      ><div id="first-followups" class="first-followups"></div
+      ><p class="first-return-inline"
+        >Отправьте уточнение и дождитесь нового ответа. Затем снова выберите вкладку «ИИ-навигатор»
+        и нажмите «Проверить материал →». Если уточнение не требуется, можно сразу перейти к
+        проверке.</p
+      ><div class="first-step-actions"
+        ><button type="button" class="secondary-button" data-first-go="3">← К выбору чата</button
+        ><button type="button" class="primary-button" data-first-go="5"
+          >Проверить материал →</button
+        ></div
+      ></section
+    >
+    <section class="lesson-step" data-first-step="5" hidden aria-labelledby="first-step-5-title"
+      ><h3 id="first-step-5-title" tabindex="-1">5. Проверьте и сохраните материал</h3
+      ><p
+        >Сопоставьте ответ с учебным материалом и решите задания самостоятельно. Дополнительная
+        просьба к ИИ проверить себя помогает уточнить ответ; окончательную проверку выполняете
+        вы.</p
+      ><div class="first-save-guide"
+        ><h4>Как сохранить результат</h4
+        ><ol
+          ><li
+            >Во вкладке с сервисом <b data-first-chat-name></b> скопируйте ответ: кнопкой
+            копирования, если она есть, или выделите текст и выберите «Копировать».</li
+          ><li
+            >Откройте свой документ для урока. Нажмите место для текста и вставьте ответ:
+            <kbd>Ctrl</kbd> + <kbd>V</kbd> (<kbd>⌘</kbd> + <kbd>V</kbd> на Mac) или «Вставить» на
+            телефоне.</li
+          ><li
+            >Отредактируйте материал для урока и сохраните документ. Затем вернитесь сюда и отметьте
+            пункты проверки.</li
+          ></ol
+        ></div
+      ><div id="first-checks" class="first-checks"></div
+      ><p id="first-check-hint" class="first-tip"
+        >Кнопка «Завершить практику» станет доступна после трёх отметок выше.</p
+      ><button
+        id="first-complete"
+        type="button"
+        class="primary-button"
+        aria-describedby="first-check-hint"
+        >Завершить практику</button
+      ><p id="first-complete-status" role="status"></p
+      ><div class="first-step-actions"
+        ><button type="button" class="secondary-button" data-first-go="4">← К уточнениям</button
+        ><button type="button" class="primary-button" data-workspace="catalog"
+          >В полный каталог →</button
+        ><button id="first-restart" type="button" class="secondary-button">Новая тема</button></div
+      ></section
+    > </div
+  ><p class="first-storage-note"
+    >Параметры и шаги запоминаются в этом браузере. Изменённый текст запроса сохраните отдельно.
+    Обучение работает без сети; ответы создаются в выбранном вами сервисе.</p
+  >
+</section>

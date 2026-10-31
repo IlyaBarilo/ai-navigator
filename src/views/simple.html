@@ -1,0 +1,106 @@
+<section
+  id="simple-workspace"
+  class="simple-workspace"
+  aria-label="Простой подбор инструментов"
+  hidden
+>
+  <div id="simple-learning" class="simple-learning"
+    ><button type="button" class="secondary-button" data-workspace="first"
+      ><svg class="icon" aria-hidden="true"><use href="#icon-info" /></svg
+      ><span
+        >Пройти обучение<span class="training-label-tail"> работе с ИИ-чатом</span></span
+      ></button
+    ><div class="simple-catalog-count" role="status" aria-live="polite" aria-atomic="true"
+      ><div class="simple-count-numbers"
+        ><span id="simple-matching-tools" hidden><span id="simple-matching-number"></span> из </span
+        ><span id="simple-total-tools">38</span></div
+      ><span class="simple-count-label">инструментов</span></div
+    ></div
+  >
+  <section aria-labelledby="simple-title-1">
+    <h1 id="simple-title-1" tabindex="-1">1. Напишите ключевые слова или просто свою тему</h1>
+    <form id="simple-task-form" role="search"
+      ><label class="sr-only" for="simple-query">Ваша задача или тема</label
+      ><input
+        id="simple-query"
+        type="search"
+        maxlength="200"
+        autocomplete="off"
+        placeholder="Например: сделать тест или фотосинтез"
+        aria-describedby="simple-task-hints"
+    /></form>
+    <details id="simple-query-examples" class="simple-query-examples" hidden
+      ><summary>Подсказать запросы</summary
+      ><div class="simple-examples-content"
+        ><p class="simple-examples-help"
+          >Нажмите на пример — подберём инструменты. Текст можно изменить.</p
+        ><div id="simple-example-groups" class="simple-example-groups"></div></div
+    ></details>
+    <div id="simple-task-hints" class="simple-task-hints" aria-live="polite" hidden></div>
+  </section>
+  <section class="simple-access-section" aria-labelledby="simple-title-2">
+    <h2 id="simple-title-2">2. Выберите доступность</h2>
+    <div class="simple-access-bar"
+      ><div
+        id="simple-access-choices"
+        class="simple-access-buttons"
+        role="group"
+        aria-label="Доступность инструментов"
+        aria-describedby="simple-access-help"
+        ><button
+          type="button"
+          class="chip"
+          data-simple-access="all"
+          title="Все условия доступа: онлайн-сервисы и локальные программы"
+          aria-pressed="false"
+          >Все</button
+        ><button
+          type="button"
+          class="chip"
+          data-simple-access="free-online"
+          title="Бесплатный доступ или квота; лимиты и условия зависят от сервиса"
+          aria-pressed="true"
+          >Бесплатно онлайн / с лимитами</button
+        ><button
+          type="button"
+          class="chip"
+          data-simple-access="local"
+          title="Установка на своём компьютере; для нейросетей рекомендуется игровая видеокарта"
+          aria-pressed="false"
+          >Бесплатно локально / У меня игровая видеокарта</button
+        ><div class="rf-filter-row"
+          ><button
+            id="simple-rf"
+            type="button"
+            class="chip rf-switch"
+            aria-pressed="true"
+            aria-describedby="simple-rf-help"
+            ><span class="rf-check" aria-hidden="true">✓</span>Доступно в РФ</button
+          ></div
+        ></div
+      ></div
+    >
+    <p id="simple-access-help" class="simple-access-help"></p>
+    <p id="simple-local-hint" class="simple-local-hint" hidden
+      >Для локальных нейросетей рекомендуется мощная игровая видеокарта. Требования к видеопамяти —
+      в «Подробнее».</p
+    >
+    <p id="simple-rf-help" class="simple-rf-help"></p>
+  </section>
+  <section
+    id="simple-live-results"
+    class="simple-live-results"
+    aria-labelledby="simple-title-3"
+    hidden
+  >
+    <h2 id="simple-title-3">3. Выберите подходящую нейросеть по качеству и сложности</h2>
+    <p id="simple-results-note" class="simple-results-note" role="status"></p>
+    <ul id="simple-results" class="simple-results" aria-label="Подходящие нейросети"></ul>
+    <div id="simple-empty" class="simple-empty" hidden
+      ><p
+        >По этой задаче с выбранным доступом ничего не нашлось. Уточните запрос или измените
+        доступность.</p
+      ></div
+    >
+  </section>
+</section>

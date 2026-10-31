@@ -1,0 +1,225 @@
+<!doctype html>
+<!--
+ИИ-навигатор. Автор: Барило И.И., https://barilo.ru/.
+Original HTML/CSS/JavaScript originally authored for this project.
+No third-party runtime, icon library, font file, logo, raster image or stock asset is embedded.
+Asset provenance: see application/json #asset-provenance and GENERATED_ASSET comments.
+Service names and linked sources identify their respective providers; they are not original logos or assets.
+Code and ordinary icons: MIT. Project name and branding: separate permission; see embedded legal notices.
+-->
+<html lang="ru" data-theme="light" data-appearance="contrast-grid"
+  ><head
+    ><meta charset="utf-8" /><meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    /><meta name="theme-color" content="#f5f7fc" /><meta name="author" content="Барило И.И." /><meta
+      name="description"
+      content="Каталог нейросетей и ИИ-инструментов: возможности, доступ, качество и сложность."
+    /><title>ИИ-навигатор — Барило И.И.</title>
+
+    <!-- ==================== НАЧАЛО ДАННЫХ КАТАЛОГА ====================
+Этот блок можно редактировать вручную в текстовом редакторе (кодировка UTF-8).
+Сохраните HTML и обновите страницу в браузере. Пересборка для этого не нужна.
+Найдите нужную нейросеть по строке "name": "Suno" или другому названию.
+
+ПАМЯТКА ПО ПОЛЯМ:
+  queryExamples   — темы и короткие запросы для «Подсказать запросы» в простом подборе.
+                    name — тема, examples[].query — текст для поля, taskId — задача.
+  tools           — список инструментов; один объект — одна карточка.
+  name            — название инструмента; description — описание на карточке.
+  url             — ссылка https; aliases — дополнительные названия для поиска.
+  functions       — возможности инструмента с отдельными условиями и оценками.
+  variant         — короткая подпись возможности (например, Код).
+  forTasks / excludeTasks — необязательные списки id задач для этой возможности.
+  category        — text, image, music, video, slides, agents или speech.
+  mode            — free (бесплатно), limited (с лимитами), paid (платно), local (локально).
+  free / paid     — описание бесплатного и платного доступа.
+  region          — ru (российский сервис), available (доступно в РФ), check (уточнить), blocked (известно ограничение),
+                    challenge (известны сложности входа), local (локальная работа).
+  region_detail   — пояснение о доступе из РФ.
+  quality.level   — качество от 1 до 5; scope — какой режим оценивается; reason — почему.
+  difficulty.level— сложность от 1 до 5; reason — пояснение оценки.
+  hardware        — требования к оборудованию (можно не задавать, если не нужны).
+  sources         — идентификаторы ссылок из общего раздела sources в конце блока.
+  tasks           — задачи выбора; name — подпись, rule — правило подбора.
+  tasks[].group   — general (общие) или teaching (педагогические).
+  taskGroups      — подписи групп в цветовой легенде; это не группы оплаты.
+  tasks[].prompts — готовые примеры запросов: title, text и note (пояснение).
+  searchAliases   — синонимы задачи; её name также распознаётся автоматически.
+  search.synonymGroups — словарь поиска: canonical — общее слово,
+                    words — равнозначные слова, prefixes — основы с окончаниями.
+  search.stopWords — общие слова запроса, которые не ограничивают поиск.
+  tags            — coding-agent у агента для программного проекта;
+                    text-to-speech у синтеза речи из текста;
+                    audio-overview у аудиообзора (не дословная озвучка).
+                    image-to-video — оживление исходного изображения;
+                    song-with-vocals — создание песни с вокалом;
+                    image-edit — изменение или стилизация исходного изображения;
+                    teaching-text — подготовка учебных текстов, заданий и критериев;
+                    study-visual — создание учебной схемы или инфографики;
+                    teaching-code — код простого учебного тренажёра в текстовом чате.
+  rule.allCategories — инструмент должен иметь ВСЕ указанные возможности.
+  rule.anyCategories / anyTags — достаточно любой указанной возможности/метки.
+  entityType      — service/application/agent; отдельные модели и веса
+                    не добавляются как карточки или локальные режимы облачного сервиса.
+  reliability     — внутренний дополнительный критерий сортировки: level high/normal; в интерфейсе не показывается.
+  originCountry   — RU только для подтверждённых российских разработок;
+                    доступность из РФ сама по себе страну разработки не задаёт.
+  freeAccessLabel — короткая подпись бесплатного доступа в карточке;
+                    условия конкретных функций по-прежнему находятся в free/paid.
+  id              — служебный уникальный код; без необходимости не меняйте.
+
+Это обычный JSON: текст пишется в двойных кавычках, между полями нужны запятые.
+Внутри строки двойная кавычка записывается как \". Последняя строка блока — без запятой.
+Не вставляйте комментарии внутрь JSON. Пояснения находятся здесь, вне данных.
+Если развиваете исходный проект: перед сборкой перенесите ручные правки из HTML
+командой node tools/import-html.mjs, затем выполните node tools/build.mjs.
+================================================================ -->
+    <script type="application/json" id="catalog-data">
+      __DATA__
+    </script>
+    <!-- ==================== КОНЕЦ ДАННЫХ КАТАЛОГА ==================== -->
+    <!-- ORIGINAL GENERATED THEME BOOTSTRAP: Restores the palette before rendering; local storage is optional. -->
+    <script id="theme-init">
+      (()=>{let theme='light';try{if(localStorage.getItem('barilo.ai-catalog.theme.v1')==='dark')theme='dark';}catch(_){}document.documentElement.dataset.theme=theme;document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#171c30':'#f5f7fc';})();
+    </script>
+    <script id="text-size-init">
+      (()=>{let size=100;try{const saved=Number(localStorage.getItem('barilo.ai-catalog.text-scale.v2'));if([100,120,150,50,75].includes(saved))size=saved;}catch(_){}document.documentElement.dataset.textScale=String(size);document.documentElement.style.setProperty('--ui-text-scale',String(size/100));})();
+    </script>
+    <style>
+      __CSS__</style
+    >__FAVICON__ </head
+  ><body data-workspace="simple">
+    <a href="#catalog" class="skip-link">К инструментам</a>__SPRITE____BACKGROUND__
+    <header class="masthead container"
+      ><a class="brand" href="#"
+        ><svg aria-hidden="true"><use href="#icon-mark" /></svg
+        ><span>ИИ<span class="brand-light">-навигатор</span></span></a
+      ><button id="help-open" class="help-link" aria-label="Как выбрать инструмент"
+        ><svg class="icon" aria-hidden="true"><use href="#icon-info" /></svg>Как выбирать</button
+      ><div class="display-controls"
+        ><nav class="workspace-nav" aria-label="Режим работы"
+          ><button
+            id="simple-tab"
+            type="button"
+            data-workspace="simple"
+            aria-controls="simple-workspace"
+            aria-pressed="true"
+            >Подбор</button
+          ><button
+            id="catalog-tab"
+            type="button"
+            data-workspace="catalog"
+            aria-controls="catalog-workspace"
+            aria-pressed="false"
+            >Эксперт</button
+          ><button
+            id="first-request-tab"
+            hidden
+            type="button"
+            data-workspace="first"
+            aria-controls="first-request"
+            aria-pressed="false"
+            >Обучение</button
+          ></nav
+        ><button
+          id="theme-toggle"
+          type="button"
+          class="theme-toggle"
+          aria-label="Тёмная тема"
+          aria-pressed="false"
+          title="Включить тёмную тему"
+          ><svg class="icon theme-sun" aria-hidden="true"><use href="#icon-sun" /></svg
+          ><svg class="icon theme-moon" aria-hidden="true"><use href="#icon-moon" /></svg
+          ><span class="theme-label">Светлая</span></button
+        ><button
+          id="text-size-toggle"
+          type="button"
+          class="text-size-toggle"
+          title="Размер текста: 100%. Следующий: 120%."
+          aria-label="Размер текста 100%. Нажмите для 120%."
+          ><span class="text-size-mark" aria-hidden="true">Аа</span
+          ><span id="text-size-label" aria-live="polite">100%</span></button
+        ></div
+      ><div class="author"
+        ><a class="author-name" href="https://barilo.ru/" target="_blank" rel="noopener noreferrer"
+          >Барило И.И.</a
+        ><small
+          ><a href="https://barilo.ru/" target="_blank" rel="noopener noreferrer">barilo.ru ↗</a
+          ><span> · </span
+          ><a
+            class="author-vk"
+            href="https://vk.ru/id4022887"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Написать автору в ВК"
+            title="Написать автору в ВК"
+            >ВК ↗</a
+          ></small
+        ></div
+      ></header
+    >
+    <main class="container"
+      ><section class="hero"
+        ><h1>Нейросети и ИИ-инструменты<span class="title-dot">.</span></h1
+        ><div class="hero-note"
+          ><div class="hero-count" aria-live="polite"
+            ><span id="matching-tools" hidden></span><span id="total-tools">38</span></div
+          ><div
+            ><b id="hero-count-label">инструментов в каталоге</b
+            ><p id="hero-match-hint" hidden>Подходят под выбранные условия</p></div
+          ></div
+        ></section
+      >
+      <!-- @include views/simple.html -->
+      <!-- @include views/training.html -->
+      <!-- @include views/expert.html -->
+      <footer class="footer">
+        <div
+          ><b>ИИ-навигатор</b
+          ><p
+            >Подборка и оформление —
+            <a href="https://barilo.ru/" target="_blank" rel="noopener noreferrer"
+              >Барило И.И. · barilo.ru</a
+            ></p
+          ><p
+            ><a
+              class="footer-vk"
+              href="https://vk.ru/id4022887"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Написать автору в ВК ↗</a
+            ></p
+          ></div
+        >
+        <section class="catalog-notice" aria-labelledby="catalog-notice-title">
+          <h2 id="catalog-notice-title">Описания и оценки</h2>
+          <p
+            >Каталог носит справочно-образовательный характер. Часть описаний подготовлена с
+            использованием ИИ и может содержать ошибки, неточности или требовать уточнения.</p
+          >
+          <p
+            >Оценки качества и сложности использования выражают субъективное мнение автора, могут
+            быть ошибочными и не являются гарантией конкретного результата. Результат зависит от
+            модели, тарифа, запроса и условий работы.</p
+          >
+          <p
+            >Возможности, тарифы, бесплатные лимиты, доступность в РФ и правила сервисов могут
+            меняться. Перед использованием самостоятельно проверяйте актуальные условия на
+            официальных сайтах, включая права на созданные материалы и правила обработки загружаемых
+            данных.</p
+          >
+        </section>
+        <button type="button" id="legal-open" class="legal-link"
+          >Лицензии и название</button
+        ></footer
+      ></main
+    >
+    <!-- @include views/dialogs.html -->
+    <script type="application/json" id="asset-provenance">
+      __PROVENANCE__</script
+    ><script>
+      __JS__
+    </script></body
+  ></html
+>
