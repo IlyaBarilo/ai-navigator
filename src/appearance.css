@@ -343,6 +343,7 @@ html[data-appearance='contrast-grid']
   min-width: 0;
 }
 .display-controls > .workspace-nav {
+  order: -1;
   display: flex;
   align-items: stretch;
   justify-content: flex-start;
@@ -438,13 +439,20 @@ html[data-appearance='contrast-grid'] :is(#simple-title-1, #simple-title-2, #sim
 
 /* GENERATED_ASSET: Original role-based typography originally authored for this project.
    Comparable controls share tokens; page titles, sections and supporting text retain hierarchy. */
-html[data-appearance='contrast-grid'] {
+html[data-appearance='contrast-grid'],
+html[data-appearance='contrast-grid'] :is(main, dialog) {
   --type-section: calc(18px * var(--ui-text-base) * var(--ui-text-scale));
   --type-subheading: calc(16px * var(--ui-text-base) * var(--ui-text-scale));
   --type-action: calc(13px * var(--ui-text-base) * var(--ui-text-scale));
   --type-control: calc(12px * var(--ui-text-base) * var(--ui-text-scale));
   --type-header: max(12px, calc(11px * var(--ui-text-base) * var(--ui-text-scale)));
   --type-button-weight: 600;
+  --type-section-line: 1.4;
+  --type-title-line: 1.3;
+  --type-subheading-line: 1.4;
+  --type-action-line: 1.5;
+  --type-control-line: 1.5;
+  --type-choice-title-line: 1.4;
 }
 html[data-appearance='contrast-grid']
   :is(
@@ -460,14 +468,14 @@ html[data-appearance='contrast-grid']
   font-family: var(--skin-heading-font);
   font-size: var(--type-section);
   font-weight: var(--skin-heading-weight);
-  line-height: 1.4;
+  line-height: var(--type-section-line);
   letter-spacing: var(--skin-letter-spacing);
 }
 html[data-appearance='contrast-grid'] :is(.tool-card h3, .simple-tool-info h2) {
   font-family: var(--skin-heading-font);
   font-size: var(--type-section);
   font-weight: var(--skin-heading-weight);
-  line-height: 1.3;
+  line-height: var(--type-title-line);
   letter-spacing: var(--skin-letter-spacing);
 }
 html[data-appearance='contrast-grid']
@@ -480,7 +488,7 @@ html[data-appearance='contrast-grid']
   font-family: var(--skin-heading-font);
   font-size: var(--type-subheading);
   font-weight: 700;
-  line-height: 1.4;
+  line-height: var(--type-subheading-line);
   letter-spacing: var(--skin-letter-spacing);
 }
 html[data-appearance='contrast-grid']
@@ -496,14 +504,14 @@ html[data-appearance='contrast-grid']
   font-family: var(--skin-heading-font);
   font-size: var(--type-action);
   font-weight: var(--type-button-weight);
-  line-height: 1.5;
+  line-height: var(--type-action-line);
   letter-spacing: 0;
 }
 html[data-appearance='contrast-grid'] :is(.chip, .simple-access-buttons .chip, .group-row .chip) {
   font-family: var(--skin-heading-font);
   font-size: var(--type-control);
   font-weight: var(--type-button-weight);
-  line-height: 1.5;
+  line-height: var(--type-control-line);
   letter-spacing: 0;
 }
 html[data-appearance='contrast-grid'] .type-chip.search-match:not([aria-pressed='true']) {
@@ -522,7 +530,7 @@ html[data-appearance='contrast-grid']
   font-family: var(--skin-heading-font);
   font-size: var(--type-control);
   font-weight: var(--type-button-weight);
-  line-height: 1.5;
+  line-height: var(--type-control-line);
   letter-spacing: 0;
 }
 html[data-appearance='contrast-grid']
@@ -541,22 +549,22 @@ html[data-appearance='contrast-grid'] .first-steps button {
   font-family: var(--skin-heading-font);
   font-size: var(--type-control);
   font-weight: var(--type-button-weight);
-  line-height: 1.5;
+  line-height: var(--type-control-line);
 }
 html[data-appearance='contrast-grid'] :is(.first-task-choices button, .first-tool-card button) {
   font-family: var(--skin-heading-font);
   font-size: var(--type-action);
-  line-height: 1.5;
+  line-height: var(--type-action-line);
 }
 html[data-appearance='contrast-grid'] :is(.first-task-choices b, .first-tool-card b) {
   font-size: calc(14px * var(--ui-text-base) * var(--ui-text-scale));
   font-weight: 700;
-  line-height: 1.4;
+  line-height: var(--type-choice-title-line);
 }
 html[data-appearance='contrast-grid'] :is(.first-task-choices span, .first-tool-card span) {
   font-size: var(--type-control);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--type-control-line);
 }
 html[data-appearance='contrast-grid'] .simple-count-label {
   font-size: calc(14px * var(--ui-text-base) * var(--ui-text-scale));
@@ -568,18 +576,158 @@ html[data-appearance='contrast-grid'] .simple-count-label {
   text-align: right;
 }
 @media (max-width: 600px) {
+  .masthead {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 140px;
+    gap: 4px 12px;
+    align-items: start;
+  }
+  .masthead > .brand {
+    grid-area: 1 / 1;
+    min-width: 0;
+  }
+  .masthead > .display-controls {
+    grid-area: 1 / 2 / 3 / 3;
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-start;
+    align-self: start;
+    gap: 6px;
+    margin: 0;
+    width: 100%;
+  }
+  .display-controls > #theme-toggle {
+    order: 1;
+  }
+  .display-controls > #text-size-toggle {
+    order: 2;
+  }
+  .display-controls > .workspace-nav {
+    order: 3;
+    flex: 1 1 100%;
+    justify-content: flex-end;
+  }
+  .masthead > .author {
+    grid-area: 2 / 1;
+    justify-self: start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    max-width: 100%;
+    text-align: left;
+    line-height: 1.35;
+  }
+  .masthead > .author small {
+    display: flex;
+    gap: 0 6px;
+    margin: 0;
+    font-size: var(--type-header);
+    line-height: 1.3;
+    white-space: normal;
+  }
+  .masthead > .author small a {
+    white-space: nowrap;
+  }
+  .masthead > .author small > span {
+    display: none;
+  }
+  /* Extra navigation and enlarged text use another row instead of crowding the name. */
+  body:not([data-workspace='simple']) .masthead > .brand,
+  html:is([data-text-scale='120'], [data-text-scale='150']) .masthead > .brand {
+    grid-column: 1 / -1;
+  }
+  .masthead > #help-open {
+    grid-area: 1 / 2;
+    justify-self: end;
+    margin: 0;
+  }
+  body:not([data-workspace='simple']) .masthead > .display-controls,
+  html:is([data-text-scale='120'], [data-text-scale='150']) .masthead > .display-controls {
+    grid-row: 2;
+  }
+  /* Keep the mobile content compact while retaining the header and user scale. */
+  html[data-appearance='contrast-grid'] :is(main, dialog) {
+    --ui-text-base: calc(1.25 * var(--skin-font-factor));
+    --type-section-line: 1.2;
+    --type-title-line: 1.2;
+    --type-subheading-line: 1.25;
+    --type-action-line: 1.2;
+    --type-control-line: 1.25;
+    --type-choice-title-line: 1.25;
+    font-size: calc(15px * var(--ui-text-base) * var(--ui-text-scale));
+    line-height: 1.45;
+  }
+  .simple-workspace {
+    margin-top: 16px;
+  }
+  .simple-learning {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
   .training-label-tail {
     display: block;
   }
   .simple-learning > .secondary-button {
+    flex: 1 1 calc(120px * var(--ui-text-base) * var(--ui-text-scale));
+    min-width: 0;
     max-width: 100%;
     text-align: center;
+    justify-content: center;
+    padding: 9px 10px;
+  }
+  .simple-learning .icon {
+    display: none;
   }
   .simple-catalog-count {
     justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
   }
-  .simple-count-label {
+  html[data-appearance='contrast-grid'] .simple-count-label {
+    font-size: calc(11px * var(--ui-text-base) * var(--ui-text-scale));
     max-width: 100%;
+  }
+  #simple-total-tools {
+    font-size: calc(32px * var(--ui-text-base) * var(--ui-text-scale));
+  }
+  #simple-matching-number {
+    font-size: calc(23px * var(--ui-text-base) * var(--ui-text-scale));
+  }
+  #simple-matching-tools {
+    font-size: calc(14px * var(--ui-text-base) * var(--ui-text-scale));
+  }
+  .simple-workspace :is(#simple-title-1, #simple-title-2, #simple-title-3) {
+    margin-bottom: 10px;
+  }
+  #simple-query {
+    padding: 10px 12px;
+    min-height: 44px;
+    font-size: max(16px, 1em);
+    line-height: 1.35;
+  }
+  .simple-query-examples {
+    margin-top: 6px;
+  }
+  .simple-access-section,
+  .simple-live-results {
+    margin-top: 20px;
+  }
+  .simple-tool-row {
+    padding: 14px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .masthead > .brand {
+    grid-column: 1 / -1;
+  }
+  .masthead > .display-controls {
+    grid-row: 2;
   }
 }
 
