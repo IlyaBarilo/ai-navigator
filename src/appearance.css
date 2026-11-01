@@ -810,6 +810,7 @@ html[data-appearance='contrast-grid'] .help-link {
   font-size: var(--type-control);
   font-weight: var(--type-button-weight);
   line-height: 1.5;
+  text-align: left;
   letter-spacing: 0;
   text-decoration: underline;
   cursor: pointer;

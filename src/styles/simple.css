@@ -20,7 +20,6 @@ body[data-workspace='simple'] #help-open {
   display: none;
 }
 .simple-workspace {
-  max-width: 900px;
   margin: 32px auto 56px;
   min-height: 48vh;
 }
