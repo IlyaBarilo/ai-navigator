@@ -58,7 +58,7 @@ const icons=[...completeSprite.matchAll(/<symbol id="([^"]+)"/g)].map(x=>({id:x[
 const provenance={
  purpose:'Inspectable resource origin and hashes; descriptive provenance, not a legal warranty.',
  author:data.author.name,
- visuals:[{id:'first-request-chat-schematic',origin:'original educational HTML/CSS schematic',thirdPartyAssets:false},{id:'catalog-backdrop',origin:'original procedural SVG background',embeddedAs:'inline SVG',sha256:sha(bg),thirdPartyAssets:false},{id:'project-favicon',origin:'project brand SVG',embeddedAs:'data URI',sha256:sha(brand),license:'separate permission: BRANDING.md',thirdPartyAssets:false},...icons],
+  visuals:[{id:'mobile-cursor-guide',origin:'original mirrored CSS robot and HTML speech bubble',license:'MIT',thirdPartyAssets:false},{id:'first-request-chat-schematic',origin:'original educational HTML/CSS schematic',thirdPartyAssets:false},{id:'catalog-backdrop',origin:'original procedural SVG background',embeddedAs:'inline SVG',sha256:sha(bg),thirdPartyAssets:false},{id:'project-favicon',origin:'project brand SVG',embeddedAs:'data URI',sha256:sha(brand),license:'separate permission: BRANDING.md',thirdPartyAssets:false},...icons],
  styles:{appearance:'Fixed Contrast Grid with a procedural CSS background',sourceFiles:[...styleSource.sourceFiles,'appearance.css'],origin:'original CSS',thirdPartyFrameworks:[],sha256:sha(css)},
  application:{origin:'original HTML and JavaScript',sourceFiles:applicationSource.sourceFiles,templateFiles:templateSource.sourceFiles,thirdPartyLibraries:[],javascriptSha256:sha(js),templateSha256:sha(template)},
  fonts:{origin:'operating system font stack',embeddedFontFiles:[],redistributedFonts:false},

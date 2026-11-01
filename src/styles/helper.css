@@ -1,0 +1,26 @@
+/* GENERATED_ASSET: Original mirrored CSS robot, speech bubble and floating guide layout. */
+.helper-toggle { display: none; }
+.helper-icon { position: relative; display: inline-block; flex: 0 0 auto; width: 36px; height: 36px; }
+.helper-robot { position: absolute; top: 5px; left: 0; width: 36px; height: 30px; border: 2px solid var(--teal); border-radius: 9px; background: var(--paper); transform: scaleX(-1); box-shadow: 0 3px 6px #0002; }
+.helper-antenna { position: absolute; top: -8px; left: 19px; width: 2px; height: 7px; background: var(--teal); }
+.helper-antenna::after { content: ''; position: absolute; top: -3px; left: -1.5px; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
+.helper-eyes { position: absolute; top: 8px; left: 11px; width: 5px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 10px 0 var(--teal); }
+.helper-smile { position: absolute; top: 17px; left: 14px; width: 9px; height: 4px; border-bottom: 2px solid var(--teal); border-radius: 50%; }
+.helper-toggle .helper-icon { width: 21px; height: 21px; }
+.helper-toggle .helper-robot { top: 50%; left: 50%; transform: translate(-50%, -50%) scaleX(-1) scale(.55); }
+.helper-toggle[aria-pressed='false'] .helper-icon { opacity: .55; }
+.helper-toggle[aria-pressed='false'] .helper-icon::after { content: ''; position: absolute; width: 26px; height: 2px; left: -3px; top: 10px; background: var(--ink); transform: rotate(-45deg); box-shadow: 0 1px var(--skin-soft); }
+.mobile-helper { position: fixed; top: 0; left: 0; z-index: 50; width: min(238px, calc(100vw - 24px)); pointer-events: none; color: var(--ink); font-family: 'Segoe UI', Arial, sans-serif; font-size: max(12px, calc(14px * var(--ui-text-scale))); line-height: 1.3; }
+.helper-bubble { position: relative; padding: 9px 12px; border: 2px solid var(--teal); border-radius: 13px; background: var(--paper); box-shadow: 0 4px 14px #0002; }
+.helper-bubble::after { content: ''; position: absolute; bottom: -7px; right: 10px; width: 11px; height: 11px; border-right: 2px solid var(--teal); border-bottom: 2px solid var(--teal); background: var(--paper); transform: rotate(45deg); }
+.helper-bubble p { margin: 0; }
+.helper-floater { display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 12px 5px 4px; }
+#helper-dismiss { position: relative; pointer-events: auto; width: 22px; height: 22px; flex: 0 0 22px; padding: 0; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 50%; font: 16px/1 Arial, sans-serif; }
+#helper-dismiss::after { content: ''; position: absolute; inset: -11px; }
+.mobile-helper[data-moving='true'] .helper-bubble, .mobile-helper[data-moving='true'] #helper-dismiss { visibility: hidden; }
+.mobile-helper.helper-small .helper-bubble { display: none; }
+.mobile-helper.helper-dock { display: flex; align-items: center; gap: 8px; width: calc(100vw - 16px); }
+.helper-dock .helper-bubble { flex: 1 1 auto; min-width: 0; }
+.helper-dock .helper-bubble::after { display: none; }
+.helper-dock .helper-floater { flex: 0 0 auto; padding: 4px; }
+@media (prefers-reduced-motion: reduce) { .mobile-helper { scroll-behavior: auto; } }

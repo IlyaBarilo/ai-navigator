@@ -16,5 +16,6 @@
   // @include app/simple.js
   // @include app/training.js
   // @include app/navigation.js
+  // @include app/helper.js
   // @include app/start.js
 })();

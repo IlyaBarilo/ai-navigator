@@ -6,3 +6,4 @@ savePreferences();
 initSimple();
 initFirstRequest();
 initWorkspace();
+initMobileHelper();

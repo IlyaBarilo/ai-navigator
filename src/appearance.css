@@ -184,6 +184,7 @@ html[data-appearance='contrast-grid']
     .chip,
     .secondary-button,
     .theme-toggle,
+    .helper-toggle,
     .text-size-toggle,
     .workspace-nav > button,
     .first-steps button,
@@ -201,7 +202,7 @@ html[data-appearance='contrast-grid']
   box-shadow: none;
 }
 html[data-appearance='contrast-grid']
-  :is(.theme-toggle, .text-size-toggle, .secondary-button, .workspace-nav > button) {
+  :is(.theme-toggle, .helper-toggle, .text-size-toggle, .secondary-button, .workspace-nav > button) {
   background: var(--skin-soft);
 }
 html[data-appearance='contrast-grid']
@@ -536,6 +537,7 @@ html[data-appearance='contrast-grid']
 html[data-appearance='contrast-grid']
   :is(
     .display-controls .theme-toggle,
+    .display-controls .helper-toggle,
     .display-controls .text-size-toggle,
     .display-controls .workspace-nav > button
   ) {
@@ -731,6 +733,23 @@ html[data-appearance='contrast-grid'] .simple-count-label {
   }
 }
 
+@media (max-width: 600px) {
+  body[data-workspace='simple'] .display-controls > .helper-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    min-height: 34px;
+    padding: 5px;
+    border-style: solid;
+    order: 2;
+  }
+  .display-controls > #text-size-toggle { order: 3; }
+  .display-controls > .workspace-nav { order: 4; }
+  .compact-display-controls #text-size-label { display: none; }
+  .compact-display-controls > #text-size-toggle { min-width: 34px; padding-inline: 7px; }
+}
+
 @media (max-width: 780px) {
   html[data-appearance='contrast-grid'] .first-steps button {
     font-size: calc(10px * var(--ui-text-base) * var(--ui-text-scale));
@@ -743,6 +762,10 @@ html[data-appearance='contrast-grid'] .help-link {
   font-weight: var(--type-button-weight);
   line-height: 1.2;
   letter-spacing: 0;
+}
+
+.display-controls > :is(#theme-toggle, #helper-toggle, #text-size-toggle) {
+  min-height: max(34px, calc(var(--type-header) * 1.2 + 16px));
 }
 @media (max-width: 780px) {
   html[data-appearance='contrast-grid'] .help-link {
