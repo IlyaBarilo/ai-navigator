@@ -18,7 +18,7 @@ export async function checkPublicFiles(root=projectRoot){
  const realRoot=await fs.realpath(root);
  for(const name of files){const file=safeFile(root,name),stat=await fs.lstat(file);if(!stat.isFile()||stat.isSymbolicLink())throw Error('Not an ordinary public file: '+name);
  const relative=path.relative(realRoot,await fs.realpath(file));if(relative==='..'||relative.startsWith('..'+path.sep)||path.isAbsolute(relative)||isPrivatePath(relative))throw Error('Public path resolves outside allowed tree');
- const bytes=await fs.readFile(file);if(!/\.(png|jpg|jpeg|ico)$/i.test(name)){const text=bytes.toString('utf8');for(const [rule,re] of [['private-key',/-----BEGIN [A-Z ]*PRIVATE KEY-----/],['access-token',/gh[pousr]_[A-Za-z0-9]{30,}/],['machine-path',/[A-Z]:[\\/](?:Users|AI-vibecoding)[\\/]/i]])if(re.test(text))problems.push({file:name,rule});}
+ const bytes=await fs.readFile(file);if(!/\.(png|jpg|jpeg|webp|ico)$/i.test(name)){const text=bytes.toString('utf8');for(const [rule,re] of [['private-key',/-----BEGIN [A-Z ]*PRIVATE KEY-----/],['access-token',/gh[pousr]_[A-Za-z0-9]{30,}/],['machine-path',/[A-Z]:[\\/](?:Users|AI-vibecoding)[\\/]/i]])if(re.test(text))problems.push({file:name,rule});}
  records.push({file:name,bytes:bytes.length,sha256:crypto.createHash('sha256').update(bytes).digest('hex')});}
  if(await fs.stat(path.join(root,'.git')).then(()=>true,()=>false)){const tracked=execFileSync('git',['-C',root,'ls-files','-z'],{encoding:'utf8'}).split('\0').filter(Boolean);for(const name of tracked)if(isPrivatePath(name)||isGeneratedPath(name))problems.push({file:name,rule:'excluded-file-tracked'});}
  if(problems.length)throw Error('Public-file review failed: '+JSON.stringify(problems));
