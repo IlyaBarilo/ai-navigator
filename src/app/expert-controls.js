@@ -1,19 +1,17 @@
 function initControls() {
   $('#total-tools').textContent = D.tools.length;
+  $('#prompt-previous').addEventListener('click', () => stepPrompt(-1));
+  $('#prompt-next').addEventListener('click', () => stepPrompt(1));
+  $('#prompt-toggle').addEventListener('click', () => {
+    promptDisclosureOpen = !promptDisclosureOpen;
+    syncPromptDisclosure();
+  });
   $('#prompt-list').addEventListener('input', (e) => {
     if (e.target.matches('textarea[data-prompt-key]')) {
       promptDrafts.set(e.target.dataset.promptKey, e.target.value);
       fitPromptArea(e.target);
     }
   });
-  $('#prompt-list').addEventListener(
-    'toggle',
-    (e) => {
-      if (e.target.matches('details') && e.target.open)
-        fitPromptArea(e.target.querySelector('textarea'));
-    },
-    true,
-  );
   $('#prompt-list').addEventListener('click', async (e) => {
     const b = e.target.closest('[data-copy-prompt]');
     if (b) await copyPrompt(b);
@@ -131,16 +129,14 @@ function initControls() {
     if (!button) return;
     const id = button.dataset.searchTask;
     if (!taskMap.has(id)) return;
-    S.types.add(id);
-    update();
+    renderPrompts(id);
     const card = [...document.querySelectorAll('[data-task-prompt]')].find(
       (c) => c.dataset.taskPrompt === id,
     );
     if (card) {
-      card.querySelector('details').open = true;
       fitPromptAreas();
-      card.querySelector('summary').focus({ preventScroll: true });
-      card.scrollIntoView({ block: 'start' });
+      card.querySelector('textarea').focus({ preventScroll: true });
+      $('#prompt-panel').scrollIntoView({ block: 'start' });
     }
   });
   $('#sort').addEventListener('change', () => {

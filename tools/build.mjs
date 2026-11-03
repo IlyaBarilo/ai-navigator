@@ -27,7 +27,7 @@ for(const t of data.tools)if(t.entityType==='service'&&t.functions.some(f=>f.mod
 if(new Set(functions.map(x=>x.id)).size!==functions.length)throw Error('Duplicate capability');
 for(const f of functions){if(!data.categories.some(x=>x.id===f.category)||!['free','limited','paid','local'].includes(f.mode)||!data.regions[f.region])throw Error('Invalid category, group or region '+f.id);for(const k of f.sources)if(!data.sources[k])throw Error('Missing source '+k);}
 for(const u of [...data.tools.map(x=>x.url),...functions.map(x=>x.url),...Object.values(data.sources).map(x=>x.url)])if(!/^https:\/\//.test(u))throw Error('Invalid external reference');
-const taskIDs=new Set();
+const taskIDs=new Set(),promptCodes=new Set();
 const taskGroupIDs=new Set(['general','teaching']);
 if(data.taskGroups){
  if(!Array.isArray(data.taskGroups))throw Error('Invalid taskGroups');
@@ -39,7 +39,7 @@ for(const task of data.tasks||[]){
  for(const c of [...(task.rule?.anyCategories||[]),...(task.rule?.allCategories||[])])if(!data.categories.some(x=>x.id===c))throw Error('Invalid task category '+task.id);
  if(!Array.isArray(task.prompts)||!task.prompts.length)throw Error('Missing examples '+task.id);
  if(task.searchAliases&&(!Array.isArray(task.searchAliases)||task.searchAliases.some(x=>typeof x!=='string')))throw Error('Invalid search aliases '+task.id);
- const examples=new Set();for(const p of task.prompts){if(!/^[a-z0-9-]+$/.test(p.id)||examples.has(p.id)||typeof p.text!=='string'||!p.text.trim())throw Error('Invalid prompt '+task.id);examples.add(p.id);}
+  const examples=new Set();for(const p of task.prompts){if(!/^[a-z0-9-]+$/.test(p.id)||examples.has(p.id)||typeof p.text!=='string'||!p.text.trim())throw Error('Invalid prompt '+task.id);examples.add(p.id);if(!/^P[0-9]{3,}$/.test(p.code)||promptCodes.has(p.code)||!Number.isSafeInteger(p.revision)||p.revision<1)throw Error('Invalid or duplicate prompt code/revision '+task.id+'/'+p.id);promptCodes.add(p.code);}
 }
 for(const f of functions)for(const key of ['forTasks','excludeTasks'])if(f[key]&&(!Array.isArray(f[key])||f[key].some(id=>!taskIDs.has(id))))throw Error('Invalid capability task scope '+f.id);
 if(data.queryExamples){

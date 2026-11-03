@@ -25,7 +25,9 @@ const taskGroups = Array.isArray(D.taskGroups)
 const taskGroupMap = new Map(taskGroups.map((g) => [g.id, g]));
 let taskPickerExpanded = false;
 const promptDrafts = new Map();
-let promptSelection = '';
+let promptSelection = '', activePromptKey = '';
+let promptWorkspace = '', promptDisclosureOpen = false;
+const promptPositions = new Map();
 const groupRank = new Map(D.groups.map((x, i) => [x.id, i]));
 const groupLabel = {
   'online-free': 'Бесплатно / с лимитами',

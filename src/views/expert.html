@@ -60,14 +60,23 @@
       ><span class="filter-label">Доступ</span
       ><div class="chips" id="group-filters" aria-label="Группы доступа"></div></div
   ></section>
-  <section id="task-prompts" class="task-prompts" aria-labelledby="prompts-title" hidden
+  <div id="expert-prompt-slot"><section id="task-prompts" class="task-prompts" aria-labelledby="prompts-title" hidden
     ><div class="prompts-heading"
       ><h2 id="prompts-title">Готовые запросы</h2
       ><p
-        >Для каждой выбранной задачи — свой пример. Можно скопировать сразу или сначала изменить
-        текст.</p
+        >По задачам из поиска и вашего выбора. Адаптируйте пример под свою тему и скопируйте в нейросеть.</p
       ></div
-    ><div id="prompt-list" class="prompt-grid"></div></section
+    ><button id="prompt-toggle" class="prompt-disclosure" type="button" aria-expanded="false" aria-controls="prompt-panel" hidden
+      ><span id="prompt-disclosure-title">Примеры запросов к нейросети</span
+      ><span class="prompt-disclosure-action"><span id="prompt-toggle-label">Развернуть</span><svg class="icon" aria-hidden="true"><use href="#icon-chevron" /></svg></span></button
+    ><div id="prompt-panel" class="prompt-card"
+      ><div class="prompt-heading"
+        ><h3 id="prompt-task-title"></h3
+        ><div class="prompt-navigation"><span id="prompt-number"></span><div class="prompt-pager" role="group" aria-label="Переключение готовых запросов"
+      ><button id="prompt-previous" class="prompt-nav-button" type="button" aria-label="Предыдущий запрос" title="Предыдущий запрос" disabled><span aria-hidden="true">←</span></button
+      ><span id="prompt-position" role="status" aria-live="polite" aria-atomic="true">0 из 0</span
+      ><button id="prompt-next" class="prompt-nav-button" type="button" aria-label="Следующий запрос" title="Следующий запрос" disabled><span aria-hidden="true">→</span></button></div></div></div
+    ><div id="prompt-list" class="prompt-grid"></div></div></section></div
   ><section id="catalog" class="catalog-section" aria-labelledby="catalog-title"
     ><div class="results-bar"
       ><div

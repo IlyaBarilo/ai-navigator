@@ -54,7 +54,7 @@ function readCatalog() {
           taskGroupIds.add(g.id);
         }
       }
-      const taskIds = new Set();
+      const taskIds = new Set(), promptCodes = new Set();
       for (const task of D.tasks) {
         if (
           !/^[a-z0-9-]+$/.test(task.id) ||
@@ -80,6 +80,13 @@ function readCatalog() {
           )
             throw Error('Проверьте id и text примера для ' + task.name);
           keys.add(example.id);
+          // Older readable catalogs may not yet carry prompt references.
+          if (example.code !== undefined || example.revision !== undefined) {
+            if (!/^P[0-9]{3,}$/.test(example.code) || promptCodes.has(example.code) ||
+                !Number.isSafeInteger(example.revision) || example.revision < 1)
+              throw Error('Проверьте уникальный code и положительный revision примера для ' + task.name);
+            promptCodes.add(example.code);
+          }
         }
         if (
           task.searchAliases &&

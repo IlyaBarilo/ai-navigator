@@ -131,6 +131,7 @@ function renderSimpleResults() {
       $('#simple-results-note').textContent = simpleAccessLabel() + ' · Найдено: 0';
     }
     renderGuided();
+    renderPrompts();
     return;
   }
   $('#simple-results-note').textContent =
@@ -150,6 +151,7 @@ function renderSimpleResults() {
     })
     .join('');
   renderGuided();
+  renderPrompts();
 }
 function renderSimpleAccess() {
   for (const button of document.querySelectorAll('[data-simple-access]')) {

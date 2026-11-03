@@ -196,9 +196,6 @@ button:disabled {
   letter-spacing: -1.8px;
   margin: 0 0 18px;
 }
-.title-dot {
-  color: var(--gold);
-}
 .hero > div > p {
   font-size: calc(15px * var(--ui-text-base) * var(--ui-text-scale));
   line-height: 1.65;

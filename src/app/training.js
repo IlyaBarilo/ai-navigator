@@ -122,7 +122,10 @@ function setWorkspace(mode, persist = true) {
   if (activeWorkspace === 'first') renderFirst();
   else if (['simple', 'steps'].includes(activeWorkspace)) renderSimple();
   else layoutTaskPicker();
-  if (!['simple', 'steps'].includes(activeWorkspace)) renderGuided();
+  if (!['simple', 'steps'].includes(activeWorkspace)) {
+    renderGuided();
+    renderPrompts();
+  }
   fitPromptAreas();
   updateHeroCount();
 }

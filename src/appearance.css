@@ -194,6 +194,7 @@ html[data-appearance='contrast-grid']
     .simple-example-button,
     .search-task-action,
     .copy-prompt,
+    .prompt-nav-button,
     .icon-button
   ) {
   color: var(--ink);
@@ -522,6 +523,7 @@ html[data-appearance='contrast-grid']
   :is(
     .primary-button,
     .secondary-button,
+    .prompt-disclosure,
     .open-link,
     .simple-workspace .primary-button,
     .simple-workspace .secondary-button,
@@ -550,6 +552,7 @@ html[data-appearance='contrast-grid']
     .simple-text-button,
     .simple-tool-actions .simple-text-button,
     .copy-prompt,
+    .prompt-nav-button,
     .search-task-action,
     .task-list-toggle,
     .reset-button
@@ -704,6 +707,9 @@ html[data-appearance='contrast-grid'] .simple-count-label {
     max-width: 100%;
     text-align: center;
     justify-content: center;
+    padding: 9px 10px;
+  }
+  .prompt-disclosure {
     padding: 9px 10px;
   }
   .simple-learning .icon {
