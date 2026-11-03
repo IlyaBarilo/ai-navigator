@@ -4,12 +4,15 @@
   aria-label="Простой подбор инструментов"
   hidden
 >
-  <div id="simple-learning" class="simple-learning"
-    ><button type="button" class="secondary-button" data-workspace="first"
-      ><svg class="icon" aria-hidden="true"><use href="#icon-info" /></svg
-      ><span
-        >Пройти обучение<span class="training-label-tail"> работе с ИИ-чатом</span></span
-      ></button
+  <div id="steps" class="guided-overview" tabindex="-1">
+    <p id="guided-status" class="guided-status" role="status" aria-live="polite" aria-atomic="true">По шагам · Шаг 1 из 3</p>
+    <ol class="guided-progress" aria-label="Этапы подбора">
+      <li data-guided-marker="1" aria-current="step">Описание</li>
+      <li data-guided-marker="2">Доступ</li>
+      <li data-guided-marker="3">Результаты</li>
+    </ol>
+  </div>
+  <div id="simple-overview" class="simple-learning"
     ><div class="simple-catalog-count" role="status" aria-live="polite" aria-atomic="true"
       ><div class="simple-count-numbers"
         ><span id="simple-matching-tools" hidden><span id="simple-matching-number"></span> из </span
@@ -17,7 +20,15 @@
       ><span class="simple-count-label">инструментов</span></div
     ></div
   >
-  <section aria-labelledby="simple-title-1">
+  <div id="simple-learning" class="simple-learning"
+    ><button type="button" class="secondary-button" data-workspace="first"
+      ><svg class="icon" aria-hidden="true"><use href="#icon-info" /></svg
+      ><span
+        >Пройти обучение<span class="training-label-tail"> работе с ИИ-чатом</span></span
+      ></button
+    ></div
+  >
+  <section id="simple-input-page" class="simple-input-page" aria-labelledby="simple-title-1">
     <h1 id="simple-title-1" tabindex="-1">1. Напишите ключевые слова или просто свою тему</h1>
     <form id="simple-task-form" role="search"
       ><label class="sr-only" for="simple-query">Ваша задача или тема</label
@@ -26,7 +37,7 @@
         type="search"
         maxlength="200"
         autocomplete="off"
-        placeholder="Например: План занятия по физике: закон Архимеда, 7 класс"
+        placeholder="План занятия по физике: закон Архимеда, 7 класс"
         aria-describedby="simple-task-hints"
     /></form>
     <details id="simple-query-examples" class="simple-query-examples" hidden
@@ -38,8 +49,8 @@
     ></details>
     <div id="simple-task-hints" class="simple-task-hints" aria-live="polite" hidden></div>
   </section>
-  <section class="simple-access-section" aria-labelledby="simple-title-2">
-    <h2 id="simple-title-2">2. Выберите доступность</h2>
+  <section id="simple-access-page" class="simple-access-section" aria-labelledby="simple-title-2">
+    <h2 id="simple-title-2" tabindex="-1">2. Выберите доступность</h2>
     <div class="simple-access-bar"
       ><div
         id="simple-access-choices"
@@ -93,7 +104,7 @@
     aria-labelledby="simple-title-3"
     hidden
   >
-    <h2 id="simple-title-3">3. Выберите подходящую нейросеть по качеству и сложности</h2>
+    <h2 id="simple-title-3" tabindex="-1">3. Выберите подходящую нейросеть по качеству и сложности</h2>
     <p id="simple-results-note" class="simple-results-note" role="status"></p>
     <ul id="simple-results" class="simple-results" aria-label="Подходящие нейросети"></ul>
     <div id="simple-empty" class="simple-empty" hidden
@@ -103,4 +114,20 @@
       ></div
     >
   </section>
+  <div id="guided-controls" class="guided-controls">
+    <div class="guided-query-summary simple-catalog-count" role="status" aria-live="polite" aria-atomic="true"
+      ><span class="sr-only">Найдено </span
+      ><div class="simple-count-numbers"
+        ><span class="guided-matching-tools"><span id="guided-query-found">0</span> из </span
+        ><span id="guided-query-total">38</span></div
+      ><span class="simple-count-label">нейросетей</span></div
+    >
+    <p id="guided-count-explainer" class="guided-query-explainer">По описанию, до выбора доступа.</p>
+    <nav id="guided-actions" class="guided-actions" aria-label="Переходы между шагами">
+    <button id="guided-back" type="button" class="secondary-button" hidden>← Назад</button>
+    <button id="guided-edit-query" type="button" class="secondary-button" hidden>Изменить описание</button>
+    <button id="guided-next" type="button" class="primary-button" disabled>Далее</button>
+    <p id="guided-input-hint" class="guided-input-hint">Напишите задачу или выберите пример, чтобы перейти дальше.</p>
+    </nav>
+  </div>
 </section>

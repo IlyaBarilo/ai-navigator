@@ -19,7 +19,7 @@ try{
  const context=await browser.newContext({offline:true,viewport:{width:390,height:844}}),p=await context.newPage();p.on('pageerror',e=>errors.push(String(e)));p.on('request',r=>{if(/^https?:/.test(r.url()))requests.push(r.url());});
  for(const tag of ['', 'v1','v0.1','v0.1.0','v0.1.2.3']){
   const output=path.join(qa,(tag||'plain')+'.html');execFileSync(process.execPath,[path.join(root,'tools/build.mjs')],{cwd:root,env:{...process.env,AI_NAVIGATOR_RELEASE_TAG:tag,AI_NAVIGATOR_BUILD_OUTPUT:output},stdio:'pipe'});
-  await p.goto(pathToFileURL(output).href);assert.equal(await p.locator('body').getAttribute('data-workspace'),'simple');
+  await p.goto(pathToFileURL(output).href);assert.equal(await p.locator('body').getAttribute('data-workspace'),'steps');
   assert.equal(await p.locator('#release-info').count(),tag?1:0);if(tag)assert.equal(await p.locator('#release-info span').textContent(),tag.slice(1));
   if(tag){const out=path.join(qa,tag+'-assets'),pack=await prepareRelease({root,tag,source:output,out});assert.deepEqual(pack.files,['ai-navigator.html','ai-navigator-'+tag.slice(1)+'.html','SHA256SUMS.txt']);for(const name of pack.files.filter(n=>n.endsWith('.html')))assert.deepEqual(await fs.readFile(path.join(out,name)),await fs.readFile(output));assert.equal((await fs.readFile(path.join(out,'SHA256SUMS.txt'),'utf8')).trim().split('\n').length,2);await assert.rejects(()=>prepareRelease({root,tag:'v9999',source:output,out}),/does not match/);}
   for(const [name,text] of originals)assert.equal(await p.locator(`[data-legal-document="${name}"]`).textContent(),text);

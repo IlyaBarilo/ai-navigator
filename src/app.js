@@ -14,6 +14,7 @@
   // @include app/results.js
   // @include app/dialogs.js
   // @include app/simple.js
+  // @include app/guided.js
   // @include app/training.js
   // @include app/navigation.js
   // @include app/helper.js

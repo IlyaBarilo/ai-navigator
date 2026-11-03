@@ -99,32 +99,30 @@ function updateHeroCount(count = getVisible().length) {
 function setWorkspace(mode, persist = true) {
   if (mode === 'expert') mode = 'catalog';
   activeWorkspace =
-    mode === 'first' && firstData ? 'first' : mode === 'catalog' ? 'catalog' : 'simple';
+    mode === 'first' && firstData ? 'first' : mode === 'catalog' ? 'catalog' : mode === 'simple' ? 'simple' : 'steps';
   document.body.dataset.workspace = activeWorkspace;
   const skip = $('.skip-link');
   skip.href =
     activeWorkspace === 'first'
       ? '#first-request'
-      : activeWorkspace === 'simple'
-        ? '#simple-workspace'
+      : ['simple', 'steps'].includes(activeWorkspace)
+        ? activeWorkspace === 'steps' ? '#steps' : '#simple-workspace'
         : '#catalog';
   skip.textContent =
     activeWorkspace === 'first'
       ? 'К обучению'
-      : activeWorkspace === 'simple'
+      : ['simple', 'steps'].includes(activeWorkspace)
         ? 'К подбору'
         : 'К инструментам';
   $('#first-request').hidden = activeWorkspace !== 'first';
   $('#catalog-workspace').hidden = activeWorkspace !== 'catalog';
-  $('#simple-workspace').hidden = activeWorkspace !== 'simple';
-  $('#simple-tab').hidden = activeWorkspace === 'simple';
-
-  for (const b of document.querySelectorAll('.workspace-nav [data-workspace]'))
-    b.setAttribute('aria-pressed', String(b.dataset.workspace === activeWorkspace));
+  $('#simple-workspace').hidden = !['simple', 'steps'].includes(activeWorkspace);
+  syncModeToggle();
   if (persist) writeHash();
   if (activeWorkspace === 'first') renderFirst();
-  else if (activeWorkspace === 'simple') renderSimple();
+  else if (['simple', 'steps'].includes(activeWorkspace)) renderSimple();
   else layoutTaskPicker();
+  if (!['simple', 'steps'].includes(activeWorkspace)) renderGuided();
   fitPromptAreas();
   updateHeroCount();
 }
@@ -293,7 +291,6 @@ function firstRadioKeyboard(container, attribute) {
 }
 function initFirstRequest() {
   if (!firstData) {
-    $('#first-request-tab').hidden = true;
     return;
   }
   loadFirst();

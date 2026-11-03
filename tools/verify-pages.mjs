@@ -30,7 +30,7 @@ try{
   await context.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
   const p=await context.newPage();p.on('pageerror',e=>errors.push(String(e)));p.on('request',r=>{if(/^https?:/.test(r.url()))requests.push(r.url());});
   const query='?source=pages&check=%D1%82%D0%B5%D1%81%D1%82';
-  for(const [entry,hash,mode]of [['','','simple'],['index.html','#view=catalog&types=music','catalog'],['','#first-request','first'],['','#view=simple&q='+encodeURIComponent('план занятия по физике'),'simple'],['ai-navigator.html','#view=expert','catalog']]){
+  for(const [entry,hash,mode]of [['','','steps'],['index.html','#view=catalog&types=music','catalog'],['','#first-request','first'],['','#view=simple&q='+encodeURIComponent('план занятия по физике'),'simple'],['ai-navigator.html','#view=expert','catalog']]){
     await p.goto(base+entry+query+hash);
     await p.waitForURL(url=>url.pathname==='/ai-navigator/ai-navigator.html');
     assert.equal(new URL(p.url()).search,query);assert.equal(new URL(p.url()).hash,hash);
@@ -38,7 +38,7 @@ try{
     assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
     cases.push({entry:entry||'/',hash,mode});
   }
-  for(const [entry,search,hash,mode]of [['','?view=first','','first'],['ai-navigator.html','?view=first','','first'],['','?view=first','#view=expert','catalog'],['','?view=first','#view=simple','simple'],['','?view=unknown','','simple']]){
+  for(const [entry,search,hash,mode]of [['','?view=first','','first'],['ai-navigator.html','?view=first','','first'],['','?view=first','#view=expert','catalog'],['','?view=first','#view=simple','simple'],['','?view=unknown','','steps']]){
     await p.goto(base+entry+search+hash);
     await p.waitForURL(url=>url.pathname.endsWith('/ai-navigator.html'));
     assert.equal(new URL(p.url()).search,search);
@@ -70,6 +70,6 @@ try{
 }finally{
   await browser?.close();await new Promise(resolve=>server.close(resolve));
 }
-const report={status:'passed',checks:['Pages contains exactly the named standalone HTML and root redirect','Pages program is byte-identical to the local build','Root and explicit entry preserve query and hash under a repository subpath','Simple, expert and training links select their intended modes','No runtime asset or external network requests','Named entry, mobile layout, offline license UI and fallback link work'],cases,pageErrors:errors};
+const report={status:'passed',checks:['Pages contains exactly the named standalone HTML and root redirect','Pages program is byte-identical to the local build','Root and explicit entry preserve query and hash under a repository subpath','Steps default, simple, expert and training links select their intended modes','No runtime asset or external network requests','Named entry, mobile layout, offline license UI and fallback link work'],cases,pageErrors:errors};
 await fs.writeFile(path.join(root,'local/qa/pages-report.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({status:report.status,checks:report.checks.length}));

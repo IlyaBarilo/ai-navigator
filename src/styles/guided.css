@@ -1,0 +1,31 @@
+/* Original three-screen presentation of the shared autonomous picker. */
+.guided-overview, .guided-controls, .guided-actions { display: none; }
+body[data-workspace='steps'] .guided-controls { display: block; }
+.guided-query-summary.simple-catalog-count, .guided-query-explainer { display: none; }
+body[data-workspace='steps'] .guided-query-summary { display: flex; flex-direction: row; align-items: baseline; column-gap: 12px; row-gap: 4px; margin: 20px 0 4px; }
+body[data-workspace='steps'] .guided-query-explainer { display: block; margin: 0; text-align: right; font-size: var(--type-control); color: var(--muted); }
+body[data-workspace='steps'] .hero,
+body[data-workspace='steps'] #help-open { display: none; }
+body[data-workspace='steps'] .guided-overview { display: block; margin-bottom: 24px; }
+.guided-status { margin: 0 0 10px; color: var(--muted); font-size: var(--type-control); font-weight: var(--type-button-weight); }
+.guided-progress { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style-position: inside; font-size: var(--type-control); color: var(--muted); }
+.guided-progress li { padding: 4px 0; }
+.guided-progress [aria-current='step'] { color: var(--teal); font-weight: var(--skin-heading-weight); border-bottom: 2px solid currentColor; }
+body[data-workspace='steps'] .guided-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 24px 0; }
+.guided-actions > button { font-family: var(--skin-heading-font); font-size: var(--type-action); font-weight: var(--type-button-weight); line-height: var(--type-action-line); border-radius: var(--skin-control-radius); }
+.guided-actions > .primary-button { background: var(--teal); color: var(--skin-on-accent); border: var(--skin-border-width) solid var(--teal); margin-left: auto; }
+#guided-edit-query { margin-left: auto; }
+.guided-actions > button:disabled { opacity: .55; }
+.guided-input-hint { flex-basis: 100%; margin: 0; font-size: var(--type-control); color: var(--muted); }
+body[data-workspace='steps'] .simple-access-section,
+body[data-workspace='steps'] .simple-live-results { margin-top: 0; }
+body[data-workspace='steps']:not([data-guided-step='1']) #simple-input-page,
+body[data-workspace='steps']:not([data-guided-step='2']) #simple-access-page,
+body[data-workspace='steps']:not([data-guided-step='3']) #simple-live-results { display: none; }
+#simple-learning { margin: 18px 0; }
+body[data-workspace='steps'] #simple-overview { display: none; }
+@media (max-width: 600px) {
+  .guided-progress { gap: 6px 12px; }
+  body[data-workspace='steps'] .guided-actions { gap: 10px; }
+  .guided-actions > button { flex: 1 1 auto; }
+}

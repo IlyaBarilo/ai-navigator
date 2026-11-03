@@ -393,16 +393,17 @@
   min-width: 0;
 }
 .footer .catalog-notice h2 {
-  margin: 0 0 9px;
-  font-size: calc(13px * var(--ui-text-base) * var(--ui-text-scale));
-  font-weight: 650;
-  color: var(--ink);
+  margin: 0 0 6px;
+  font-size: var(--type-note-title);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--muted);
 }
 .footer .catalog-notice p {
-  font-size: calc(12px * var(--ui-text-base) * var(--ui-text-scale));
-  line-height: 1.7;
-  margin: 8px 0 0;
-  color: var(--ink);
+  font-size: var(--type-note);
+  line-height: 1.45;
+  margin: 6px 0 0;
+  color: var(--muted);
 }
 .footer .catalog-notice p:first-of-type {
   margin-top: 0;
@@ -411,10 +412,6 @@
   .footer {
     grid-template-columns: 1fr;
     gap: 23px;
-  }
-  .footer .catalog-notice p {
-    font-size: calc(12px * var(--ui-text-base) * var(--ui-text-scale));
-    line-height: 1.65;
   }
 }
 

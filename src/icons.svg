@@ -17,6 +17,8 @@ __BRAND_SYMBOL__
 <symbol id="icon-agents" viewBox="0 0 24 24"><desc>Оригинальный SVG-значок.</desc><rect x="8" y="3" width="8" height="6" rx="2"/><rect x="2" y="15" width="7" height="6" rx="2"/><rect x="15" y="15" width="7" height="6" rx="2"/><path d="M12 9v3M5.5 15v-3h13v3"/></symbol>
 <!-- GENERATED_ASSET: icon-close. Original SVG geometry originally authored for this project; no icon pack used. -->
 <symbol id="icon-close" viewBox="0 0 24 24"><desc>Оригинальный SVG-значок.</desc><path d="m6 6 12 12M18 6 6 18"/></symbol>
+<!-- GENERATED_ASSET: icon-modes. Original three-position switch with cycling arrows; no icon pack used. -->
+<symbol id="icon-modes" viewBox="0 0 24 24"><desc>Переключение трёх режимов.</desc><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 12h3M14 12h3M4 5h15l-3-3M20 19H5l3 3"/></symbol>
 <!-- GENERATED_ASSET: icon-arrow. Original SVG geometry originally authored for this project; no icon pack used. -->
 <symbol id="icon-arrow" viewBox="0 0 24 24"><desc>Оригинальный SVG-значок.</desc><path d="M6 18 18 6M7 6h11v11"/></symbol>
 <!-- GENERATED_ASSET: icon-info. Original SVG geometry originally authored for this project; no icon pack used. -->

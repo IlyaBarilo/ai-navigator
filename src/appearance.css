@@ -3,6 +3,7 @@
 html[data-appearance='contrast-grid'] {
   --ink: #27334e;
   --muted: #5a6682;
+  --placeholder: #6e7687;
   --line: #b9c5df;
   --paper: #ffffff;
   --teal: #3e57a5;
@@ -46,6 +47,7 @@ html[data-appearance='contrast-grid'] {
   html[data-theme='dark'][data-appearance='contrast-grid'] {
     --ink: #f0f2ff;
     --muted: #c0c9e1;
+    --placeholder: #929eb9;
     --line: #6b7fa4;
     --paper: #242d46;
     --teal: #b5c2ff;
@@ -176,7 +178,7 @@ html[data-appearance='contrast-grid'] .search-box input {
 }
 html[data-appearance='contrast-grid']
   :is(#simple-query, .search-box input, .first-fields input)::placeholder {
-  color: var(--muted);
+  color: var(--placeholder);
   opacity: 1;
 }
 html[data-appearance='contrast-grid']
@@ -236,10 +238,10 @@ html[data-appearance='contrast-grid']
   background: var(--paper);
 }
 html[data-appearance='contrast-grid'] .simple-task-hint {
-  color: var(--general-ink);
+  color: var(--teal);
 }
 html[data-appearance='contrast-grid'] .simple-task-hint[data-group='teaching'] {
-  color: var(--teaching-ink);
+  color: var(--teal);
 }
 html[data-appearance='contrast-grid']
   :is(.simple-access-buttons .chip, .first-task-choices button, .simple-example-button):hover {
@@ -364,6 +366,25 @@ html[data-appearance='contrast-grid']
   font-size: max(12px, calc(11px * var(--ui-text-base) * var(--ui-text-scale)));
   white-space: nowrap;
 }
+.display-controls > .workspace-nav > #mode-toggle {
+  gap: 7px;
+  max-width: 100%;
+  white-space: normal;
+}
+.workspace-nav > #mode-toggle > #mode-label {
+  display: inline;
+  color: inherit;
+  font: inherit;
+}
+.workspace-nav #mode-toggle > .icon { width: 20px; height: 20px; flex: 0 0 20px; }
+.simple-learning > .secondary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 17px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
 .rf-filter-row {
   display: flex;
   align-items: center;
@@ -403,11 +424,13 @@ html[data-appearance='contrast-grid']
   flex-shrink: 0;
   line-height: 1;
 }
-#simple-total-tools {
+#simple-total-tools,
+#guided-query-total {
   font-size: calc(44px * var(--ui-text-base) * var(--ui-text-scale));
   font-weight: 600;
 }
-#simple-matching-tools {
+#simple-matching-tools,
+.guided-matching-tools {
   font-size: calc(22px * var(--ui-text-base) * var(--ui-text-scale));
   font-weight: 400;
 }
@@ -427,7 +450,8 @@ html[data-appearance='contrast-grid']
   color: var(--skin-on-accent);
 }
 
-#simple-matching-number {
+#simple-matching-number,
+#guided-query-found {
   font-size: calc(28px * var(--ui-text-base) * var(--ui-text-scale));
   font-weight: 400;
 }
@@ -447,6 +471,8 @@ html[data-appearance='contrast-grid'] :is(main, dialog) {
   --type-action: calc(13px * var(--ui-text-base) * var(--ui-text-scale));
   --type-control: calc(12px * var(--ui-text-base) * var(--ui-text-scale));
   --type-header: max(12px, calc(11px * var(--ui-text-base) * var(--ui-text-scale)));
+  --type-note-title: calc(10.5px * var(--ui-text-base) * var(--ui-text-scale));
+  --type-note: calc(9.5px * var(--ui-text-base) * var(--ui-text-scale));
   --type-button-weight: 600;
   --type-section-line: 1.4;
   --type-title-line: 1.3;

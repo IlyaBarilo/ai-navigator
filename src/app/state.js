@@ -45,7 +45,7 @@ function savePreferences() {
 }
 function readHash() {
   const p = new URLSearchParams(location.hash.slice(1));
-  if (p.get('view') === 'simple') return false;
+  if (['simple', 'steps'].includes(p.get('view'))) return false;
   if (
     !['types', 'groups', 'quality', 'difficulty', 'q', 'sort', 'rf', 'exact'].some((k) => p.has(k))
   )
@@ -70,7 +70,7 @@ function restorePreferences() {
   readHash();
 }
 function writeHash() {
-  if (activeWorkspace === 'simple') {
+  if (['simple', 'steps'].includes(activeWorkspace)) {
     writeSimpleHash();
     return;
   }

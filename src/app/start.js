@@ -4,6 +4,7 @@ initControls();
 update(false);
 savePreferences();
 initSimple();
+initGuided();
 initFirstRequest();
 initWorkspace();
 initMobileHelper();

@@ -89,7 +89,7 @@ Code and ordinary icons: MIT. Project name and branding: separate permission; se
     <style>
       __CSS__</style
     >__FAVICON__ </head
-  ><body data-workspace="simple">
+  ><body data-workspace="steps">
     <a href="#catalog" class="skip-link">К инструментам</a>__SPRITE____BACKGROUND__
     <header class="masthead container"
       ><a class="brand" href="#"
@@ -119,28 +119,9 @@ Code and ordinary icons: MIT. Project name and branding: separate permission; se
           ><span class="text-size-mark" aria-hidden="true">Аа</span
            ><span id="text-size-label" aria-live="polite">100%</span></button
         ><nav class="workspace-nav" aria-label="Режим работы"
-          ><button
-            id="simple-tab"
-            type="button"
-            data-workspace="simple"
-            aria-controls="simple-workspace"
-            aria-pressed="true"
-            >Подбор</button
-          ><button
-            id="catalog-tab"
-            type="button"
-            data-workspace="catalog"
-            aria-controls="catalog-workspace"
-            aria-pressed="false"
-            >Эксперт</button
-          ><button
-            id="first-request-tab"
-            hidden
-            type="button"
-            data-workspace="first"
-            aria-controls="first-request"
-            aria-pressed="false"
-            >Обучение</button
+          ><button id="mode-toggle" type="button" aria-label="Режим: По шагам. Нажмите для режима Просто."
+            ><svg class="icon" aria-hidden="true"><use href="#icon-modes" /></svg
+            ><span id="mode-label" aria-live="polite">По шагам</span></button
           ></nav
         ></div
       ><div class="author"

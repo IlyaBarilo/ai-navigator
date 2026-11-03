@@ -30,7 +30,7 @@ function applySimple(saved) {
 }
 function readSimpleHash() {
   const params = new URLSearchParams(location.hash.slice(1));
-  if (params.get('view') !== 'simple') return false;
+  if (!['simple', 'steps'].includes(params.get('view'))) return false;
   applySimple({
     q: params.get('q') || '',
     access: params.get('access') || 'free-online',
@@ -44,7 +44,8 @@ function saveSimple() {
   } catch (_) {}
 }
 function writeSimpleHash() {
-  const params = new URLSearchParams({ view: 'simple' });
+  const guided = activeWorkspace === 'steps', params = new URLSearchParams({ view: guided ? 'steps' : 'simple' });
+  if (guided && guidedStep > 1) params.set('step', String(guidedStep));
   if (P.q) params.set('q', P.q);
   if (P.access.length !== 1 || P.access[0] !== 'free-online')
     params.set('access', P.access.length ? P.access.join(',') : 'all');
@@ -76,8 +77,12 @@ function simplePlan() {
 function simpleIsTopic(plan) {
   return !!(P.q.trim() && !plan.tasks.length && !plan.tools.size && plan.terms.length);
 }
-function simpleVisible() {
+function simpleVisible({ beforeAccess = false } = {}) {
   return withSimpleSelection(() => {
+    if (beforeAccess) {
+      S.groups = new Set();
+      S.rfOnly = false;
+    }
     const plan = searchPlan(),
       topic = simpleIsTopic(plan);
     if (topic) S.q = '';
@@ -117,14 +122,22 @@ function renderSimpleResults() {
     meaningful =
       P.q.trim() &&
       (plan.tasks.length || plan.tools.size || plan.terms.length || plan.filters.length);
-  $('#simple-live-results').hidden = !meaningful;
-  if (!meaningful) return;
+  $('#simple-live-results').hidden = !meaningful && activeWorkspace !== 'steps';
+  if (!meaningful) {
+    if (activeWorkspace === 'steps') {
+      $('#simple-matching-number').textContent = hasQuery ? '0' : '';
+      $('#simple-results').replaceChildren();
+      $('#simple-empty').hidden = false;
+      $('#simple-results-note').textContent = simpleAccessLabel() + ' · Найдено: 0';
+    }
+    renderGuided();
+    return;
+  }
   $('#simple-results-note').textContent =
     simpleAccessLabel() +
     ' · ' +
     (P.rfOnly ? 'Доступно в РФ' : 'Все регионы') +
-    ' · Найдено: ' +
-    rows.length;
+    (activeWorkspace === 'steps' ? '' : ' · Найдено: ' + rows.length);
   $('#simple-empty').hidden = rows.length > 0;
   $('#simple-results').innerHTML = rows
     .map(({ tool, matched }) => {
@@ -136,6 +149,7 @@ function renderSimpleResults() {
       return `<li class="simple-tool-row" data-simple-tool="${esc(tool.id)}"><div class="simple-tool-info"><h2>${esc(tool.name)}</h2><p class="simple-tool-description">${esc(f.description)}</p><div class="simple-tool-ratings"><span>Качество ${stars(f.quality.level)}</span><span class="simple-difficulty" aria-label="Сложность ${f.difficulty.level} из 5">Сложность <span class="difficulty-symbols" aria-hidden="true">${Array.from({ length: 5 }, (_, i) => icon('diamond', i < f.difficulty.level ? 'filled' : 'empty')).join('')}</span><b>${f.difficulty.level}/5</b></span></div><div class="simple-tool-tags">${prices.map((g) => `<span class="access-tag ${g}">${esc(g === 'online-free' ? freeAccessLabel(tool) : g === 'local' ? 'Локально' : 'Платно')}</span>`).join('')}${unknown ? '<span class="access-tag availability-unknown">Доступ уточнить</span>' : ''}${restricted ? '<span class="access-tag rf-limited">Есть ограничения РФ</span>' : ''}</div>${local ? `<p class="simple-hardware">${esc(f.hardware?.label || 'Рекомендуется мощная игровая видеокарта')}</p>` : ''}</div><div class="simple-tool-actions"><a class="primary-button" href="${esc(f.url)}" target="_blank" rel="noopener noreferrer" aria-label="${local ? 'Как установить' : 'Открыть'} ${esc(tool.name)}">${local ? 'Как установить' : 'Открыть'} ↗</a><button type="button" class="simple-text-button" data-simple-details="${esc(tool.id)}" data-simple-function="${esc(f.id)}" aria-label="Возможности и условия: ${esc(tool.name)}">Подробнее</button></div></li>`;
     })
     .join('');
+  renderGuided();
 }
 function renderSimpleAccess() {
   for (const button of document.querySelectorAll('[data-simple-access]')) {
@@ -206,6 +220,7 @@ function initSimple() {
     renderSimple();
     saveSimple();
     writeSimpleHash();
+    if (activeWorkspace === 'steps') goGuidedStep(2);
   });
   $('#simple-access-choices').addEventListener('click', (e) => {
     const b = e.target.closest('[data-simple-access]');
