@@ -811,6 +811,10 @@ html[data-appearance='contrast-grid'] .help-link {
 }
 
 /* Compact mobile steps keep navigation close to the user's current decision. */
+/* Step headings receive reading focus after navigation, without a control-like outline. */
+body[data-workspace='steps'] :is(#simple-title-1, #simple-title-2, #simple-title-3):focus {
+  outline: none;
+}
 @media (max-width: 600px) {
   body[data-workspace='steps'] .masthead {
     --compact-header-size: max(36px, calc(var(--type-header) * 1.2 + 16px));

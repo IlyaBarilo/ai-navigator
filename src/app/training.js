@@ -121,7 +121,7 @@ function setWorkspace(mode, persist = true) {
   if (persist) writeHash();
   if (activeWorkspace === 'first') renderFirst();
   else if (['simple', 'steps'].includes(activeWorkspace)) renderSimple();
-  else layoutTaskPicker();
+  else update(false);
   if (!['simple', 'steps'].includes(activeWorkspace)) {
     renderGuided();
     renderPrompts();

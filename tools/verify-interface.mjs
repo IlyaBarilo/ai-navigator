@@ -39,4 +39,25 @@ for(const mode of ['light','dark']){if(await p.locator('html').getAttribute('dat
 for(const width of [1289,1024,390,320]){await p.setViewportSize({width,height:1050});for(const scale of [100,120,150,50,75]){for(let n=0;n<5&&await p.locator('#text-size-label').textContent()!==scale+'%';n++)await p.locator('#text-size-toggle').click();assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),mode+'/'+width+'/'+scale);assert(await p.locator('#simple-total-tools').evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>parseFloat(getComputedStyle(document.getElementById('simple-matching-tools')).fontSize)));if(width<=600){const h=await p.evaluate(()=>{const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom}};return {brand:box('.brand'),author:box('.author'),controls:box('.display-controls'),theme:box('#theme-toggle'),size:box('#text-size-toggle'),nav:box('.workspace-nav'),edge:document.querySelector('.masthead').getBoundingClientRect().right-parseFloat(getComputedStyle(document.querySelector('.masthead')).paddingRight)}});assert(Math.abs(h.author.left-h.brand.left)<1&&h.author.top>=h.brand.bottom-1,'author under brand on the left');assert(Math.abs(h.controls.right-h.edge)<1,'controls align right');assert(h.theme.top<=h.size.top&&h.size.bottom<=h.nav.top,'theme and scale precede navigation');} if(scale===100&&(width===1289||width===390))await p.screenshot({path:path.join(qa,'selected-'+mode+'-'+width+'.png'),animations:'disabled'});}}
 }
 checks.push('Selected palette, live counts and all text scales fit; mobile author is below the name on the left, controls align right with theme/scale first');
+const independent=await b.newContext({offline:true}),returnPage=await independent.newPage();
+returnPage.on('pageerror',e=>errors.push(String(e)));returnPage.on('request',r=>requests.push(r.url()));
+await returnPage.goto(pathToFileURL(file).href+'#view=catalog&q='+encodeURIComponent('музыка')+'&quality=5&difficulty=2');
+const expertState=await returnPage.evaluate(()=>localStorage.getItem('barilo.ai-catalog.preferences.v1'));
+for(const source of ['simple','steps','first']){
+  await switchMode(returnPage,source==='first'?'simple':source);
+  await returnPage.locator('#simple-query').fill('план занятия');
+  if(source==='first')await returnPage.locator('#simple-learning button').click();
+  // Inactive form values must not become the source of truth on returning to Expert.
+  await returnPage.locator('#search').evaluate(e=>e.value='');
+  await switchMode(returnPage,'catalog');
+  assert.equal(await returnPage.locator('#search').inputValue(),'музыка',source);
+  assert.equal(await returnPage.locator('#quality-value').textContent(),'5/5');
+  assert.equal(await returnPage.locator('#difficulty-value').textContent(),'2/5');
+  assert.equal(await returnPage.evaluate(()=>localStorage.getItem('barilo.ai-catalog.preferences.v1')),expertState);
+}
+await switchMode(returnPage,'simple');await returnPage.reload();await switchMode(returnPage,'catalog');
+assert.equal(await returnPage.locator('#search').inputValue(),'музыка');
+assert.equal(await returnPage.evaluate(()=>localStorage.getItem('barilo.ai-catalog.preferences.v1')),expertState);
+await independent.close();
+checks.push('Returning from Simple, Steps or learning redraws Expert controls from its independent selection, including after reload');
 assert.deepEqual(errors,[]);assert(requests.every(u=>u.startsWith('file:')));const report={status:'passed',checks,tools:d.tools.length,capabilities:d.tools.reduce((n,t)=>n+t.functions.length,0),pageErrors:errors,networkRequests:requests.filter(u=>!u.startsWith('file:')).length,htmlSha256:sha(await fs.readFile(file)),visualReview:'pending'};await fs.writeFile(path.join(qa,'selected-appearance-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({checks:checks.length,status:'passed',networkRequests:report.networkRequests}));}finally{await b.close();}
