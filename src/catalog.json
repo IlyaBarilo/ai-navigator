@@ -80,11 +80,13 @@
           "tags": [
             "teaching-code"
           ],
-          "variant": "Код",
+          "variant": "Онлайн",
           "forTasks": [
             "vibe-simple",
             "learning-game"
-          ]
+          ],
+          "displayLabel": "Код",
+          "displayIcon": "code"
         },
         {
           "id": "alice-slides",
@@ -875,7 +877,10 @@
           },
           "tags": [
             "coding-agent"
-          ]
+          ],
+          "displayLabel": "Claude Code",
+          "displayIcon": "code",
+          "variant": "Агент"
         },
         {
           "id": "claude-slides",
@@ -927,7 +932,9 @@
             "level": 3,
             "name": "Средняя",
             "reason": "Нужно выбрать подходящий режим, проверить доступ и уточнить запрос."
-          }
+          },
+          "displayLabel": "Cowork",
+          "variant": "Агент"
         }
       ]
     },
@@ -2852,7 +2859,8 @@
             "name": "Высокий",
             "scope": "Deep Research.",
             "reason": "Полезен для связного исследования; качество определяется источниками и проверкой выводов."
-          }
+          },
+          "displayLabel": "Исследования"
         },
         {
           "id": "qwen-slides",
@@ -2909,7 +2917,10 @@
           },
           "tags": [
             "coding-agent"
-          ]
+          ],
+          "displayLabel": "Qwen Code",
+          "displayIcon": "code",
+          "variant": "Агент"
         }
       ]
     },

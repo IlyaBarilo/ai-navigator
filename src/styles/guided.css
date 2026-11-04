@@ -14,8 +14,9 @@ body[data-workspace='steps'] .guided-overview { display: block; margin-bottom: 2
 body[data-workspace='steps'] .guided-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 24px 0; }
 .guided-actions > button { font-family: var(--skin-heading-font); font-size: var(--type-action); font-weight: var(--type-button-weight); line-height: var(--type-action-line); border-radius: var(--skin-control-radius); }
 .guided-actions > .primary-button { background: var(--teal); color: var(--skin-on-accent); border: var(--skin-border-width) solid var(--teal); margin-left: auto; }
-#guided-edit-query { margin-left: auto; }
+.learning-label-short, .prompt-label-short, .results-title-short { display: none; }
 .guided-actions > button:disabled { opacity: .55; }
+#guided-back { gap: 8px; }
 .guided-input-hint { flex-basis: 100%; margin: 0; font-size: var(--type-control); color: var(--muted); }
 body[data-workspace='steps'] .simple-access-section,
 body[data-workspace='steps'] .simple-live-results { margin-top: 0; }

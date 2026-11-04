@@ -1,5 +1,16 @@
 // Three screens share the original simple matcher and its access preferences.
 let guidedStep = 1;
+const guidedMobile = matchMedia('(max-width: 600px)');
+function placeGuidedHelp() {
+  const compact = activeWorkspace === 'steps' && guidedStep === 3 && guidedMobile.matches,
+    toggle = $('#prompt-toggle');
+  if (compact) {
+    $('#guided-actions').append($('#simple-learning'), toggle);
+  } else {
+    $('#task-prompts').insertBefore(toggle, $('#prompt-panel'));
+  }
+  document.body.classList.toggle('guided-mobile-actions', compact);
+}
 function guidedQueryCount(beforeAccess = false) {
   const plan = simplePlan(), meaningful = P.q.trim() &&
     (plan.tasks.length || plan.tools.size || plan.terms.length || plan.filters.length);
@@ -15,6 +26,7 @@ function renderGuided() {
   const guided = activeWorkspace === 'steps', root = $('#simple-workspace'),
     learning = $('#simple-learning'), results = $('#simple-live-results'), controls = $('#guided-controls');
   if (!guided) {
+    placeGuidedHelp();
     root.setAttribute('aria-label', 'Простой подбор инструментов');
     if (activeWorkspace === 'catalog') $('#catalog-learning-slot').append(learning);
     else results.insertBefore(learning, $('#simple-prompt-slot'));
@@ -36,11 +48,13 @@ function renderGuided() {
     else marker.removeAttribute('aria-current');
   }
   results.insertBefore(learning, $('#simple-prompt-slot'));
-  if (guidedStep === 3) results.insertBefore(controls, $('#simple-results-note'));
+  if (guidedStep === 3) results.insertBefore(controls, $('#simple-title-3').nextSibling);
   else $('#' + (guidedStep === 1 ? 'simple-input-page' : 'simple-access-page')).append(controls);
   $('#guided-back').hidden = guidedStep === 1;
-  $('#guided-back').textContent = guidedStep === 3 ? '← Назад к доступу' : '← Назад к описанию';
-  $('#guided-edit-query').hidden = guidedStep !== 3;
+  const backLabel = guidedStep === 3 ? 'Назад к доступу' : 'Назад к описанию';
+  $('#guided-back .guided-back-label').textContent = backLabel;
+  $('#guided-back').setAttribute('aria-label', backLabel);
+  $('#guided-back').title = backLabel;
   $('#guided-change-access').hidden = !canChangeAccess;
   $('#guided-next').hidden = guidedStep === 3;
   $('#guided-next').disabled = !canContinue;
@@ -53,6 +67,7 @@ function renderGuided() {
     : P.q.trim()
       ? 'Нейросети не найдены. Дополните описание или выберите другой пример.'
       : 'Напишите задачу или выберите пример, чтобы перейти дальше.';
+  placeGuidedHelp();
 }
 function goGuidedStep(step, { changeAccess = false } = {}) {
   if (activeWorkspace !== 'steps') return;
@@ -68,6 +83,6 @@ function initGuided() {
   readGuidedStep();
   $('#guided-next').addEventListener('click', () => goGuidedStep(guidedStep + 1));
   $('#guided-back').addEventListener('click', () => goGuidedStep(guidedStep - 1));
-  $('#guided-edit-query').addEventListener('click', () => goGuidedStep(1));
   $('#guided-change-access').addEventListener('click', () => goGuidedStep(2, { changeAccess: true }));
+  guidedMobile.addEventListener('change', () => { renderGuided(); syncPromptDisclosure(); });
 }

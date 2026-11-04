@@ -30,7 +30,9 @@ function syncPromptDisclosure() {
     expanded = !novice || promptDisclosureOpen;
   $('#task-prompts .prompts-heading').hidden = novice;
   $('#task-prompts').setAttribute('aria-labelledby', novice ? 'prompt-disclosure-title' : 'prompts-title');
-  $('#prompt-toggle').hidden = !novice;
+  $('#prompt-toggle').hidden = !novice || $('#task-prompts').hidden ||
+    (activeWorkspace === 'steps' && guidedStep !== 3);
+  $('#prompt-toggle').setAttribute('aria-label', (promptDisclosureOpen ? 'Свернуть' : 'Развернуть') + ' примеры запросов к нейросети');
   $('#prompt-toggle').setAttribute('aria-expanded', String(novice && promptDisclosureOpen));
   $('#prompt-toggle-label').textContent = promptDisclosureOpen ? 'Свернуть' : 'Развернуть';
   $('#prompt-panel').hidden = !expanded;

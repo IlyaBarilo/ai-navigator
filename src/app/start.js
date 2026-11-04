@@ -1,6 +1,7 @@
 $('#legal-open').addEventListener('click', (e) => openDialog($('#legal-dialog'), e.currentTarget));
 restorePreferences();
 initControls();
+initDialogScrollbars();
 update(false);
 savePreferences();
 initSimple();

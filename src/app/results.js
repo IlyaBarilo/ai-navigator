@@ -43,6 +43,12 @@ function getVisible(accept) {
   });
   return visible;
 }
+function capabilityLabel(f) {
+  return f.displayLabel || category.get(f.category).name;
+}
+function capabilityIcon(f) {
+  return f.displayIcon || f.category;
+}
 function capabilityVariant(f) {
   if (f.variant) return f.variant;
   return f.mode === 'local'
@@ -70,8 +76,8 @@ function extraCapability(t, f) {
       : isRestricted(f)
         ? 'Есть ограничения доступа из РФ.'
         : '';
-  const hint = `${category.get(f.category).name} · ${capabilityVariant(f)}\n${f.name}\n${modeLabel[f.mode]} · Качество: ${f.quality.level}/5 · Сложность: ${f.difficulty.level}/5\n${access}${access ? ' ' : ''}Не входит в текущий подбор. Нажмите, чтобы открыть условия.`;
-  return `<button type="button" class="extra-capability" data-function="${f.id}" data-details="${t.id}" data-focus-function="${f.id}" title="${esc(hint)}" aria-label="${esc(hint)}">${icon(f.category)}</button>`;
+  const hint = `${capabilityLabel(f)} · ${capabilityVariant(f)}\n${f.name}\n${modeLabel[f.mode]} · Качество: ${f.quality.level}/5 · Сложность: ${f.difficulty.level}/5\n${access}${access ? ' ' : ''}Не входит в текущий подбор. Нажмите, чтобы открыть условия.`;
+  return `<button type="button" class="extra-capability" data-function="${f.id}" data-details="${t.id}" data-focus-function="${f.id}" title="${esc(hint)}" aria-label="${esc(hint)}">${icon(capabilityIcon(f))}</button>`;
 }
 function card({ tool: t, matched, taskNames = [] }) {
   const matchIDs = new Set(matched.map((f) => f.id));
@@ -85,7 +91,7 @@ function card({ tool: t, matched, taskNames = [] }) {
     lo = Math.min(...levels),
     hi = Math.max(...levels);
   const domain = new URL(t.url).hostname.replace(/^www\./, '');
-  return `<article class="tool-card" data-tool="${t.id}"><div class="card-top"><h3>${esc(t.name)}</h3><span class="card-mark" title="${esc(category.get(matched[0].category).name)}">${icon(matched[0].category)}</span></div><p class="card-description">${esc(t.description)}</p>${taskNames.length ? `<p class="card-task-fit"><b>Подходит:</b> ${esc(taskNames.join(' · '))}</p>` : ''}<ul class="capability-list" aria-label="Подходящие возможности ${esc(t.name)}">${matched.map((f) => `<li class="capability matched" data-function="${f.id}" title="${esc(f.quality.scope)}">${icon(f.category)}<span class="cap-label">${esc(category.get(f.category).name)}<small>${esc(capabilityVariant(f))}</small></span>${stars(f.quality.level)}</li>`).join('')}</ul>${additional.length ? `<div class="extra-capabilities" role="group" aria-label="Другие возможности ${esc(t.name)}, вне текущего подбора"><span class="extra-capabilities-label">Также есть</span>${additional.map((f) => extraCapability(t, f)).join('')}</div>` : ''}<div class="card-access">${groups.map((g) => `<span class="access-tag ${g}">${esc(g === 'online-free' ? freeAccessLabel(t) : groupLabel[g])}</span>`).join('')}${unknownAccess ? '<span class="access-tag availability-unknown" data-availability="check">Доступ уточнить</span>' : ''}${restrictedAccess ? '<span class="access-tag rf-limited" data-availability="restricted">Есть ограничения работы в РФ</span>' : ''}</div><div class="card-difficulty"><span>Сложность</span><span class="difficulty-rating"><span class="difficulty-symbols" aria-hidden="true">${Array.from({ length: 5 }, (_, i) => icon('diamond', i < hi ? 'filled' : 'empty')).join('')}</span><span class="difficulty-value">${lo === hi ? lo : lo + '–' + hi}/5</span></span></div><div class="card-footer"><button class="details-button" type="button" data-details="${t.id}" aria-label="Возможности и условия: ${esc(t.name)}">Возможности и условия</button><a class="open-link" href="${esc(matched[0].url)}" target="_blank" rel="noopener noreferrer" aria-label="Открыть ${esc(t.name)}" title="${esc(domain)}">Открыть ${icon('arrow')}</a></div></article>`;
+  return `<article class="tool-card" data-tool="${t.id}"><div class="card-top"><h3>${esc(t.name)}</h3><span class="card-mark" title="${esc(capabilityLabel(matched[0]))}">${icon(capabilityIcon(matched[0]))}</span></div><p class="card-description">${esc(t.description)}</p>${taskNames.length ? `<p class="card-task-fit"><b>Подходит:</b> ${esc(taskNames.join(' · '))}</p>` : ''}<ul class="capability-list" aria-label="Подходящие возможности ${esc(t.name)}">${matched.map((f) => `<li class="capability matched" data-function="${f.id}" title="${esc(f.quality.scope)}">${icon(capabilityIcon(f))}<span class="cap-label">${esc(capabilityLabel(f))}<small>${esc(capabilityVariant(f))}</small></span>${stars(f.quality.level)}</li>`).join('')}</ul>${additional.length ? `<div class="extra-capabilities" role="group" aria-label="Другие возможности ${esc(t.name)}, вне текущего подбора"><span class="extra-capabilities-label">Также есть</span>${additional.map((f) => extraCapability(t, f)).join('')}</div>` : ''}<div class="card-access">${groups.map((g) => `<span class="access-tag ${g}">${esc(g === 'online-free' ? freeAccessLabel(t) : groupLabel[g])}</span>`).join('')}${unknownAccess ? '<span class="access-tag availability-unknown" data-availability="check">Доступ уточнить</span>' : ''}${restrictedAccess ? '<span class="access-tag rf-limited" data-availability="restricted">Есть ограничения работы в РФ</span>' : ''}</div><div class="card-difficulty"><span>Сложность</span><span class="difficulty-rating"><span class="difficulty-symbols" aria-hidden="true">${Array.from({ length: 5 }, (_, i) => icon('diamond', i < hi ? 'filled' : 'empty')).join('')}</span><span class="difficulty-value">${lo === hi ? lo : lo + '–' + hi}/5</span></span></div><div class="card-footer"><button class="details-button" type="button" data-details="${t.id}" aria-label="Возможности и условия: ${esc(t.name)}">Возможности и условия</button><a class="open-link" href="${esc(matched[0].url)}" target="_blank" rel="noopener noreferrer" aria-label="Открыть ${esc(t.name)}" title="${esc(domain)}">Открыть ${icon('arrow')}</a></div></article>`;
 }
 function update(save = true) {
   for (const b of document.querySelectorAll('[data-type]'))

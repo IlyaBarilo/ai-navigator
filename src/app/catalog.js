@@ -23,6 +23,12 @@ function readCatalog() {
           !['ru', 'available', 'check', 'blocked', 'challenge', 'local'].includes(f.region)
         )
           throw Error('У ' + t.name + ' проверьте category, mode и region.');
+        if (f.displayLabel !== undefined &&
+            (typeof f.displayLabel !== 'string' || !f.displayLabel.trim()))
+          throw Error('У ' + t.name + ' displayLabel должен быть непустой подписью.');
+        if (f.displayIcon !== undefined &&
+            (!/^[a-z0-9-]+$/.test(f.displayIcon) || !document.getElementById('icon-' + f.displayIcon)))
+          throw Error('У ' + t.name + ' displayIcon должен обозначать встроенный значок.');
         if (
           !f.quality ||
           !f.difficulty ||

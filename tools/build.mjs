@@ -26,6 +26,7 @@ for(const t of data.tools)if(t.entityType&&!['service','application','agent'].in
 for(const t of data.tools)if(t.entityType==='service'&&t.functions.some(f=>f.mode==='local'))throw Error('Put local software in an application card, not model weights under an online service: '+t.id);
 if(new Set(functions.map(x=>x.id)).size!==functions.length)throw Error('Duplicate capability');
 for(const f of functions){if(!data.categories.some(x=>x.id===f.category)||!['free','limited','paid','local'].includes(f.mode)||!data.regions[f.region])throw Error('Invalid category, group or region '+f.id);for(const k of f.sources)if(!data.sources[k])throw Error('Missing source '+k);}
+for(const f of functions){if(f.displayLabel!==undefined&&(typeof f.displayLabel!=='string'||!f.displayLabel.trim()))throw Error('Invalid capability displayLabel '+f.id);if(f.displayIcon!==undefined&&(!/^[a-z0-9-]+$/.test(f.displayIcon)||!completeSprite.includes('<symbol id="icon-'+f.displayIcon+'"')))throw Error('Unknown capability displayIcon '+f.id);}
 for(const u of [...data.tools.map(x=>x.url),...functions.map(x=>x.url),...Object.values(data.sources).map(x=>x.url)])if(!/^https:\/\//.test(u))throw Error('Invalid external reference');
 const taskIDs=new Set(),promptCodes=new Set();
 const taskGroupIDs=new Set(['general','teaching']);
