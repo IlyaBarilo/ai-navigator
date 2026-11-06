@@ -44,12 +44,11 @@ function readCatalog() {
         if (
           !f.quality ||
           !f.difficulty ||
-          ![f.quality.level, f.difficulty.level].every(
-            (n) => Number.isInteger(n) && n >= 1 && n <= 5,
-          )
+          !(f.quality.level === null || (Number.isInteger(f.quality.level) && f.quality.level >= 1 && f.quality.level <= 5)) ||
+          !(Number.isInteger(f.difficulty.level) && f.difficulty.level >= 1 && f.difficulty.level <= 5)
         )
           throw Error(
-            'У ' + t.name + ' оценки quality.level и difficulty.level должны быть от 1 до 5.',
+            'У ' + t.name + ' quality.level должен быть от 1 до 5 или null (не оценено), difficulty.level — от 1 до 5.',
           );
         if (
           !Array.isArray(f.sources) ||

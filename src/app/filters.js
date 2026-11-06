@@ -1,7 +1,7 @@
 function matches(t, f) {
   if (S.rfOnly && isRestricted(f)) return false;
   if (S.groups.size && !S.groups.has(priceGroup(f))) return false;
-  if (f.quality.level < S.quality) return false;
+  if (S.quality && (f.quality.level === null || f.quality.level < S.quality)) return false;
   if (S.difficulty && f.difficulty.level > S.difficulty) return false;
   const plan = searchPlan();
   if (!matchesPresentation(f, plan.presentation)) return false;

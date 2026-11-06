@@ -5,7 +5,7 @@ const reliabilityReason = (t) => t.reliability?.reason || 'Редакционн�
 const freeAccessLabel = (t) => t.freeAccessLabel || 'Бесплатно / с лимитами';
 function getVisible(accept) {
   const visible = D.tools.map((t) => selectedMatches(t, accept)).filter((x) => x.matched.length);
-  const score = (x) => Math.max(...x.matched.map((f) => f.quality.level)),
+  const score = (x) => Math.max(...x.matched.map(qualityScore)),
     difficulty = (x) => Math.min(...x.matched.map((f) => f.difficulty.level)),
     access = (x) => Math.min(...x.matched.map((f) => groupRank.get(priceGroup(f))));
   visible.sort((a, b) => {
@@ -96,7 +96,7 @@ function extraCapability(t, f) {
       : isRestricted(f)
         ? 'Есть ограничения доступа из РФ.'
         : '';
-  const hint = `${capabilityLabel(f)} · ${capabilityVariant(f)}\n${f.name}\n${modeLabel[f.mode]} · Качество: ${f.quality.level}/5 · Сложность: ${f.difficulty.level}/5\n${access}${access ? ' ' : ''}Не входит в текущий подбор. Нажмите, чтобы открыть условия.`;
+  const hint = `${capabilityLabel(f)} · ${capabilityVariant(f)}\n${f.name}\n${modeLabel[f.mode]} · ${f.quality.level === null ? qualityLabel(f) : 'Качество: ' + f.quality.level + '/5'} · Сложность: ${f.difficulty.level}/5\n${access}${access ? ' ' : ''}Не входит в текущий подбор. Нажмите, чтобы открыть условия.`;
   return `<button type="button" class="extra-capability" data-function="${f.id}" data-details="${t.id}" data-focus-function="${f.id}" title="${esc(hint)}" aria-label="${esc(hint)}">${icon(capabilityIcon(f))}</button>`;
 }
 function card({ tool: t, matched, taskNames = [] }) {

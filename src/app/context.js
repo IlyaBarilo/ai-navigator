@@ -50,6 +50,9 @@ const modeLabel = {
 };
 const icon = (name, extra = '') =>
   `<svg class="icon ${extra}" aria-hidden="true"><use href="#icon-${name}"/></svg>`;
-const stars = (n, full = true) =>
-  `<span class="mini-rating" role="img" aria-label="Качество ${n} из 5">${Array.from({ length: 5 }, (_, i) => icon('star', i < n ? 'filled' : 'empty')).join('')}${full ? `<span class="numeric">${n}/5</span>` : ''}</span>`;
+const qualityScore = (f) => f.quality.level ?? 0;
+const qualityLabel = (f) => f.quality.level === null ? 'Качество не оценено' : 'Качество ' + f.quality.level + '/5 · ' + f.quality.name;
+const stars = (n, full = true) => n === null
+  ? `<span class="quality-unrated" aria-label="Качество не оценено">${full ? 'Качество не оценено' : 'Не оценено'}</span>`
+  : `<span class="mini-rating" role="img" aria-label="Качество ${n} из 5">${Array.from({ length: 5 }, (_, i) => icon('star', i < n ? 'filled' : 'empty')).join('')}${full ? `<span class="numeric">${n}/5</span>` : ''}</span>`;
 const normalize = (s) => String(s).toLocaleLowerCase('ru').replaceAll('ё', 'е');

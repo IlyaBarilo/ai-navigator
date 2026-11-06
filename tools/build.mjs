@@ -25,6 +25,7 @@ if(new Set(data.tools.map(x=>x.id)).size!==data.tools.length)throw Error('Duplic
 for(const t of data.tools)if(t.entityType&&!['service','application','agent'].includes(t.entityType))throw Error('Tool cards must describe services, applications or agents, not downloadable models: '+t.id);
 for(const t of data.tools)if(t.entityType==='service'&&t.functions.some(f=>f.mode==='local'))throw Error('Put local software in an application card, not model weights under an online service: '+t.id);
 if(new Set(functions.map(x=>x.id)).size!==functions.length)throw Error('Duplicate capability');
+for(const f of functions)if(!f.quality||!(f.quality.level===null||(Number.isInteger(f.quality.level)&&f.quality.level>=1&&f.quality.level<=5))||!f.difficulty||!Number.isInteger(f.difficulty.level)||f.difficulty.level<1||f.difficulty.level>5)throw Error('Invalid quality or difficulty '+f.id);
 for(const f of functions){if(!data.categories.some(x=>x.id===f.category)||!['free','limited','paid','local'].includes(f.mode)||!data.regions[f.region])throw Error('Invalid category, group or region '+f.id);for(const k of f.sources)if(!data.sources[k])throw Error('Missing source '+k);}
 for(const f of functions){if(f.displayLabel!==undefined&&(typeof f.displayLabel!=='string'||!f.displayLabel.trim()))throw Error('Invalid capability displayLabel '+f.id);if(f.displayIcon!==undefined&&(!/^[a-z0-9-]+$/.test(f.displayIcon)||!completeSprite.includes('<symbol id="icon-'+f.displayIcon+'"')))throw Error('Unknown capability displayIcon '+f.id);}
 if(data.search?.presentation){
