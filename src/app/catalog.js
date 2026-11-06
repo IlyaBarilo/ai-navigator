@@ -29,6 +29,18 @@ function readCatalog() {
         if (f.displayIcon !== undefined &&
             (!/^[a-z0-9-]+$/.test(f.displayIcon) || !document.getElementById('icon-' + f.displayIcon)))
           throw Error('У ' + t.name + ' displayIcon должен обозначать встроенный значок.');
+        if (f.delivery !== undefined) {
+          const delivery = f.delivery, formats = D.search?.presentation?.formats || [],
+            methods = ['download', 'save-code', 'browser-print', 'integration', 'local-build', 'web'];
+          if (!delivery || !Array.isArray(delivery.outputs) ||
+              typeof delivery.requirements !== 'string' ||
+              (delivery.note !== undefined && typeof delivery.note !== 'string') ||
+              delivery.outputs.some((o) => !o || !formats.some((x) => x.id === o.format) ||
+                !methods.includes(o.method) || !['yes', 'no', 'unknown'].includes(o.editable) ||
+                !Array.isArray(o.sources) || !o.sources.length || !o.sources.every((s) => D.sources?.[s]) ||
+                (o.note !== undefined && typeof o.note !== 'string')))
+            throw Error('У ' + t.name + ' проверьте delivery: формат, способ, редактируемость и источники.');
+        }
         if (
           !f.quality ||
           !f.difficulty ||
@@ -103,6 +115,15 @@ function readCatalog() {
       }
     }
     if (D.search) {
+      if (D.search.presentation) {
+        const p = D.search.presentation;
+        if (!Array.isArray(p.formats) || new Set(p.formats.map((x) => x.id)).size !== p.formats.length ||
+            p.formats.some((f) => !/^[a-z0-9-]+$/.test(f.id) || typeof f.name !== 'string' ||
+              !Array.isArray(f.aliases) || f.aliases.some((a) => typeof a !== 'string' || !a.trim())) ||
+            ['editableAliases', 'directAliases', 'sourcePrefixes', 'sourceFillers'].some((k) =>
+              !Array.isArray(p[k]) || p[k].some((a) => typeof a !== 'string' || !a.trim())))
+          throw Error('Проверьте форматы и формулировки в search.presentation.');
+      }
       if (
         !Array.isArray(D.search.synonymGroups) ||
         !Array.isArray(D.search.stopWords) ||

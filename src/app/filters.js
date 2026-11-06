@@ -4,6 +4,7 @@ function matches(t, f) {
   if (f.quality.level < S.quality) return false;
   if (S.difficulty && f.difficulty.level > S.difficulty) return false;
   const plan = searchPlan();
+  if (!matchesPresentation(f, plan.presentation)) return false;
   if (plan.tools.size && !plan.tools.has(t.id)) return false;
   if (!matchesQueryConditions(f, plan.filters)) return false;
   const terms = plan.terms;

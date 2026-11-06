@@ -27,6 +27,14 @@ for(const t of data.tools)if(t.entityType==='service'&&t.functions.some(f=>f.mod
 if(new Set(functions.map(x=>x.id)).size!==functions.length)throw Error('Duplicate capability');
 for(const f of functions){if(!data.categories.some(x=>x.id===f.category)||!['free','limited','paid','local'].includes(f.mode)||!data.regions[f.region])throw Error('Invalid category, group or region '+f.id);for(const k of f.sources)if(!data.sources[k])throw Error('Missing source '+k);}
 for(const f of functions){if(f.displayLabel!==undefined&&(typeof f.displayLabel!=='string'||!f.displayLabel.trim()))throw Error('Invalid capability displayLabel '+f.id);if(f.displayIcon!==undefined&&(!/^[a-z0-9-]+$/.test(f.displayIcon)||!completeSprite.includes('<symbol id="icon-'+f.displayIcon+'"')))throw Error('Unknown capability displayIcon '+f.id);}
+if(data.search?.presentation){
+ const p=data.search.presentation;
+ if(!Array.isArray(p.formats)||new Set(p.formats.map(x=>x.id)).size!==p.formats.length||p.formats.some(f=>!/^[a-z0-9-]+$/.test(f.id)||typeof f.name!=='string'||!Array.isArray(f.aliases)||f.aliases.some(a=>typeof a!=='string'||!a.trim()))||['editableAliases','directAliases','sourcePrefixes','sourceFillers'].some(k=>!Array.isArray(p[k])||p[k].some(a=>typeof a!=='string'||!a.trim())))throw Error('Invalid search.presentation');
+}
+for(const f of functions)if(f.delivery!==undefined){
+ const x=f.delivery,formats=data.search?.presentation?.formats||[];
+ if(!x||!Array.isArray(x.outputs)||typeof x.requirements!=='string'||(x.note!==undefined&&typeof x.note!=='string')||x.outputs.some(o=>!o||!formats.some(v=>v.id===o.format)||!['download','save-code','browser-print','integration','local-build','web'].includes(o.method)||!['yes','no','unknown'].includes(o.editable)||!Array.isArray(o.sources)||!o.sources.length||!o.sources.every(s=>data.sources[s])||(o.note!==undefined&&typeof o.note!=='string')))throw Error('Invalid delivery '+f.id);
+}
 for(const u of [...data.tools.map(x=>x.url),...functions.map(x=>x.url),...Object.values(data.sources).map(x=>x.url)])if(!/^https:\/\//.test(u))throw Error('Invalid external reference');
 const taskIDs=new Set(),promptCodes=new Set();
 const taskGroupIDs=new Set(['general','teaching']);

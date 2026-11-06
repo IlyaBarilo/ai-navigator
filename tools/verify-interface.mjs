@@ -60,4 +60,30 @@ assert.equal(await returnPage.locator('#search').inputValue(),'музыка');
 assert.equal(await returnPage.evaluate(()=>localStorage.getItem('barilo.ai-catalog.preferences.v1')),expertState);
 await independent.close();
 checks.push('Returning from Simple, Steps or learning redraws Expert controls from its independent selection, including after reload');
+const formatContext=await b.newContext({offline:true,viewport:{width:390,height:844}}),formatPage=await formatContext.newPage();
+formatPage.on('pageerror',e=>errors.push(String(e)));formatPage.on('request',r=>requests.push(r.url()));
+for(const mode of ['catalog','simple','steps']){
+ const selector=mode==='catalog'?'.tool-card':'[data-simple-tool]',key=mode==='catalog'?'tool':'simpleTool';
+ const find=async(query,extra='')=>{
+   await formatPage.goto(pathToFileURL(file).href+'#view='+mode+(mode==='steps'?'&step=3':'')+'&q='+encodeURIComponent(query)+(mode==='catalog'?'&groups=&rf=0':'&access=all&rf=0')+extra);
+   return formatPage.locator(selector).evaluateAll((es,k)=>es.map(e=>e.dataset[k]),key);
+ };
+ const broad=await find('презентация');assert.equal(broad.length,d.tools.filter(t=>t.functions.some(f=>f.category==='slides')).length);
+ const pptx=await find('презентация PPTX');assert(pptx.includes('gamma')&&pptx.includes('slidesgo')&&pptx.includes('kimi')&&pptx.includes('marp')&&pptx.includes('notebook'));assert(!pptx.includes('alice')&&!pptx.includes('qwen')&&!pptx.includes('gigachat'));
+ const editable=await find('редактируемая презентация PPTX');assert(editable.includes('gamma')&&editable.includes('kimi'));assert(!editable.includes('marp')&&!editable.includes('notebook')&&!editable.includes('codex'));
+ assert.deepEqual(new Set(await find('презентация HTML')),new Set(['alice','qwen','marp']));
+ const pdf=await find('презентация PDF');assert(pdf.includes('alice')&&pdf.includes('gamma')&&pdf.includes('beautiful'));assert(!pdf.includes('qwen')&&!pdf.includes('slidesgo'));
+ assert.equal((await find('презентация из PDF')).length,broad.length,'Input PDF is not an output-format constraint');
+ const both=await find('презентация PPTX PDF');assert(both.includes('gamma')&&!both.includes('slidesgo')&&!both.includes('alice'));
+ assert.equal((await find('Алиса презентация PPTX')).length,0);
+ assert((await formatPage.locator(mode==='catalog'?'#empty-message':'#simple-empty').textContent()).includes('формат'));
+ await find('презентация PDF готовый файл');assert.equal(await formatPage.locator(selector+(mode==='catalog'?'[data-tool="alice"]':'[data-simple-tool="alice"]')).count(),0,'Browser print is not direct download');
+ await find('презентация PPTX');assert((await formatPage.locator(selector).first().locator('.delivery-result').textContent()).includes('PPTX'));assert(await formatPage.locator(selector).first().locator('.delivery-requirements').isVisible());
+}
+await formatPage.goto(pathToFileURL(file).href+'#view=steps&q='+encodeURIComponent('Алиса презентация PPTX'));
+assert.equal(await formatPage.locator('#guided-query-found').textContent(),'0');assert(await formatPage.locator('#guided-next').isDisabled());assert((await formatPage.locator('#guided-input-hint').textContent()).includes('формат'));
+await formatPage.goto(pathToFileURL(file).href+'#view=simple&q='+encodeURIComponent('презентация PDF'));
+await formatPage.locator('[data-simple-tool="alice"] [data-simple-details]').click();assert((await formatPage.locator('[data-detail-function="alice-slides"] .delivery-result').textContent()).includes('печать'));await formatPage.keyboard.press('Escape');
+await formatContext.close();
+checks.push('Presentation formats, editability and delivery methods match the same capability in all three modes; input PDF stays separate, unknown exports are excluded and zero blocks Next');
 assert.deepEqual(errors,[]);assert(requests.every(u=>u.startsWith('file:')));const report={status:'passed',checks,tools:d.tools.length,capabilities:d.tools.reduce((n,t)=>n+t.functions.length,0),pageErrors:errors,networkRequests:requests.filter(u=>!u.startsWith('file:')).length,htmlSha256:sha(await fs.readFile(file)),visualReview:'pending'};await fs.writeFile(path.join(qa,'selected-appearance-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({checks:checks.length,status:'passed',networkRequests:report.networkRequests}));}finally{await b.close();}

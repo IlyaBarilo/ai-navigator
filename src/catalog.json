@@ -118,7 +118,29 @@
           "variant": "HTML",
           "forTasks": [
             "slides"
-          ]
+          ],
+          "delivery": {
+            "outputs": [
+              {
+                "format": "html",
+                "method": "save-code",
+                "editable": "yes",
+                "sources": [
+                  "alice-code-help"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "browser-print",
+                "editable": "no",
+                "sources": [
+                  "alice-code-help"
+                ],
+                "note": "После сохранения HTML; проверьте разбиение на страницы."
+              }
+            ],
+            "requirements": "Сохранить HTML-код и проверить показ в браузере."
+          }
         },
         {
           "id": "alice-image",
@@ -317,6 +339,20 @@
             "name": "Базовый",
             "scope": "Базовая генерация презентации.",
             "reason": "Редакционная оценка автора для готовых презентаций: 2/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "web",
+                "method": "web",
+                "editable": "yes",
+                "sources": [
+                  "gigaslides"
+                ]
+              }
+            ],
+            "requirements": "Сбер ID и раздел «Giga Проекты».",
+            "note": "Форматы скачивания в этом режиме пока не подтверждены."
           }
         },
         {
@@ -555,7 +591,8 @@
           "url": "https://chatgpt.com/",
           "sources": [
             "audit-chatgpt-slides",
-            "audit-chatgpt-work-files"
+            "audit-chatgpt-work-files",
+            "format-chatgpt-slides"
           ],
           "mode": "paid",
           "region": "blocked",
@@ -570,6 +607,28 @@
             "level": 4,
             "name": "Выше средней",
             "reason": "Авторская оценка сложности создания и получения готовой презентации — 4/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "yes",
+                "sources": [
+                  "format-chatgpt-slides"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "download",
+                "editable": "no",
+                "sources": [
+                  "format-chatgpt-slides"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт и доступ к Slides / Space; экспорт на веб-версии.",
+            "note": "После экспорта проверьте оформление и содержимое."
           }
         }
       ]
@@ -727,7 +786,8 @@
           "url": "https://gemini.google.com/",
           "sources": [
             "gemini",
-            "geminiru"
+            "geminiru",
+            "format-gemini-canvas"
           ],
           "difficulty": {
             "level": 4,
@@ -739,6 +799,28 @@
             "name": "Базовый",
             "scope": "Сборка в Canvas и последующая правка.",
             "reason": "Редакционная оценка автора для готовых презентаций: 2/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "web",
+                "method": "web",
+                "editable": "yes",
+                "sources": [
+                  "format-gemini-canvas"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "download",
+                "editable": "no",
+                "sources": [
+                  "format-gemini-canvas"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт Google и Canvas.",
+            "note": "Экспорт в Google Slides описан отдельно; прямой PPTX здесь не подтверждён."
           }
         },
         {
@@ -906,6 +988,27 @@
             "level": 4,
             "name": "Выше средней",
             "reason": "Авторская оценка сложности создания и получения готовой презентации — 4/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "yes",
+                "sources": [
+                  "audit-claude-files"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "download",
+                "editable": "no",
+                "sources": [
+                  "audit-claude-files"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт и включённое создание файлов."
           }
         },
         {
@@ -2015,6 +2118,37 @@
             "name": "Базовый",
             "scope": "Markdown, своя тема и проверка сборки.",
             "reason": "Редакционная оценка автора для готовых презентаций: 2/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "html",
+                "method": "local-build",
+                "editable": "yes",
+                "sources": [
+                  "audit-marp-cli"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "local-build",
+                "editable": "no",
+                "sources": [
+                  "audit-marp-cli"
+                ]
+              },
+              {
+                "format": "pptx",
+                "method": "local-build",
+                "editable": "no",
+                "sources": [
+                  "audit-marp-cli"
+                ],
+                "note": "Обычный экспорт содержит изображения слайдов."
+              }
+            ],
+            "requirements": "Markdown и установка Marp; для PDF/PPTX нужен браузер.",
+            "note": "Редактируемый PPTX — отдельный экспериментальный режим с LibreOffice; в точный подбор редактируемого PPTX не включён."
           }
         }
       ]
@@ -2064,6 +2198,27 @@
             "name": "Ведущий в подборке",
             "scope": "Генерация структуры и оформление с правками.",
             "reason": "Редакционная оценка автора для готовых презентаций: 5/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "yes",
+                "sources": [
+                  "gamma-export"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "download",
+                "editable": "no",
+                "sources": [
+                  "gamma-export"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт Gamma; на Free при экспорте остаётся отметка сервиса."
           }
         },
         {
@@ -2229,6 +2384,29 @@
             "name": "Базовый",
             "scope": "Презентация по загруженным источникам.",
             "reason": "Редакционная оценка автора для готовых презентаций: 2/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pdf",
+                "method": "download",
+                "editable": "no",
+                "sources": [
+                  "notebookslides"
+                ]
+              },
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "unknown",
+                "sources": [
+                  "notebookslides"
+                ],
+                "note": "Редактируемость текста и объектов после экспорта не подтверждена."
+              }
+            ],
+            "requirements": "Аккаунт Google и источники в блокноте.",
+            "note": "Возможность скачать PPTX не подтверждает редактируемость его элементов."
           }
         },
         {
@@ -2380,7 +2558,8 @@
           "url": "https://www.canva.com/",
           "sources": [
             "canva",
-            "canvaru"
+            "canvaru",
+            "format-canva-download"
           ],
           "difficulty": {
             "level": 4,
@@ -2392,6 +2571,28 @@
             "name": "Базовый",
             "scope": "ИИ-дизайн и ручное редактирование.",
             "reason": "Редакционная оценка автора для готовых презентаций: 2/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "yes",
+                "sources": [
+                  "format-canva-download"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "download",
+                "editable": "no",
+                "sources": [
+                  "format-canva-download"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт Canva; платные элементы и условия экспорта проверяются отдельно.",
+            "note": "После экспорта оформление и анимация могут измениться."
           }
         },
         {
@@ -2573,7 +2774,9 @@
           "region_detail": "В использованных официальных источниках статус для РФ не подтверждён. Перед занятием проверить вход; оплату из РФ отдельно не подтверждали.",
           "url": "https://www.beautiful.ai/",
           "sources": [
-            "beautiful"
+            "beautiful",
+            "format-beautiful-pptx",
+            "format-beautiful-pdf"
           ],
           "difficulty": {
             "level": 4,
@@ -2585,6 +2788,28 @@
             "name": "Базовый",
             "scope": "Автоматическое оформление слайдов.",
             "reason": "Редакционная оценка автора для готовых презентаций: 2/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "yes",
+                "sources": [
+                  "format-beautiful-pptx"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "download",
+                "editable": "no",
+                "sources": [
+                  "format-beautiful-pdf"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт и тариф Pro / Team / Enterprise для редактируемого PPTX.",
+            "note": "PDF статичен; анимация, аудио и видео в нём не сохраняются."
           }
         },
         {
@@ -2887,6 +3112,20 @@
             "level": 4,
             "name": "Выше средней",
             "reason": "Авторская оценка сложности создания и получения готовой презентации — 4/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "html",
+                "method": "save-code",
+                "editable": "yes",
+                "sources": [
+                  "audit-qwen-slides"
+                ]
+              }
+            ],
+            "requirements": "Режим Artifacts; сохранить HTML и проверить в браузере.",
+            "note": "PDF и PPTX в этом режиме отдельно не подтверждены."
           }
         },
         {
@@ -3458,7 +3697,8 @@
           "url": "https://slidesgo.com/ai/presentation-maker",
           "sources": [
             "wepik",
-            "slidesgo"
+            "slidesgo",
+            "format-slidesgo-pptx"
           ],
           "mode": "limited",
           "region": "ru",
@@ -3473,6 +3713,20 @@
             "name": "Высокий",
             "scope": "Генерация через Slidesgo.",
             "reason": "Редакционная оценка автора для готовых презентаций: 4/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "yes",
+                "sources": [
+                  "format-slidesgo-pptx"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт Slidesgo; действуют лимиты генерации и скачивания.",
+            "note": "Экспорт PDF именно из текущего AI Presentation Maker не подтверждён."
           }
         },
         {
@@ -3649,7 +3903,8 @@
           "paid": "Расширенные модели, лимиты и операции зависят от тарифа.",
           "url": "https://manus.im/",
           "sources": [
-            "audit-manus-slides"
+            "audit-manus-slides",
+            "format-manus-slides"
           ],
           "mode": "limited",
           "region": "challenge",
@@ -3664,6 +3919,27 @@
             "level": 4,
             "name": "Выше средней",
             "reason": "Авторская оценка сложности создания и получения готовой презентации — 4/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "yes",
+                "sources": [
+                  "format-manus-slides"
+                ]
+              },
+              {
+                "format": "pdf",
+                "method": "download",
+                "editable": "no",
+                "sources": [
+                  "format-manus-slides"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт, доступные кредиты и режим презентаций."
           }
         },
         {
@@ -3891,6 +4167,11 @@
             "level": 4,
             "name": "Выше средней",
             "reason": "Авторская оценка сложности создания и получения готовой презентации — 4/5."
+          },
+          "delivery": {
+            "outputs": [],
+            "requirements": "Аккаунт и доступ к Perplexity Computer.",
+            "note": "Формат и редактируемость результата пока не подтверждены."
           }
         }
       ]
@@ -4012,7 +4293,9 @@
           "url": "https://openai.com/codex/",
           "sources": [
             "audit-presentation-plugin",
-            "audit-codex-files"
+            "audit-codex-files",
+            "format-openai-presentations",
+            "format-openai-plugins"
           ],
           "mode": "paid",
           "region": "blocked",
@@ -4027,6 +4310,21 @@
             "level": 4,
             "name": "Выше средней",
             "reason": "Авторская оценка сложности создания и получения готовой презентации — 4/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "unknown",
+                "sources": [
+                  "format-openai-presentations",
+                  "format-openai-plugins"
+                ]
+              }
+            ],
+            "requirements": "Доступ к плагину Presentations и подходящей среде.",
+            "note": "Доступность плагина зависит от среды. Редактируемость отдельных элементов экспортированного файла проверяется отдельно."
           }
         }
       ]
@@ -4194,7 +4492,8 @@
           "url": "https://www.kimi.com/",
           "sources": [
             "audit-kimi-ppt",
-            "kimiplans"
+            "kimiplans",
+            "format-kimi-download"
           ],
           "difficulty": {
             "level": 4,
@@ -4206,6 +4505,21 @@
             "name": "Базовый",
             "scope": "Режим готового редактируемого документа.",
             "reason": "Редакционная оценка автора для готовых презентаций: 2/5."
+          },
+          "delivery": {
+            "outputs": [
+              {
+                "format": "pptx",
+                "method": "download",
+                "editable": "yes",
+                "sources": [
+                  "audit-kimi-ppt",
+                  "format-kimi-download"
+                ]
+              }
+            ],
+            "requirements": "Аккаунт и режим Kimi PPT; проверить доступные кредиты.",
+            "note": "PDF и HTML как форматы скачивания в этом режиме отдельно не подтверждены."
           }
         },
         {
@@ -6094,7 +6408,76 @@
         ],
         "message": "Условие «без регистрации» проверьте в карточке и на сайте сервиса: отдельно оно в каталоге не подтверждено."
       }
-    ]
+    ],
+    "presentation": {
+      "formats": [
+        {
+          "id": "html",
+          "name": "HTML",
+          "aliases": [
+            "html",
+            "htm",
+            "хтмл"
+          ]
+        },
+        {
+          "id": "pptx",
+          "name": "PPTX",
+          "aliases": [
+            "pptx",
+            "powerpoint",
+            "пауэрпоинт",
+            "пауэрпойнт",
+            "пптх"
+          ]
+        },
+        {
+          "id": "pdf",
+          "name": "PDF",
+          "aliases": [
+            "pdf",
+            "пдф"
+          ]
+        },
+        {
+          "id": "web",
+          "name": "Показ в сервисе",
+          "aliases": []
+        }
+      ],
+      "editableAliases": [
+        "редактируемая",
+        "редактируемую",
+        "редактируемый",
+        "редактируемые",
+        "редактируемом",
+        "редактировать в powerpoint"
+      ],
+      "directAliases": [
+        "прямой экспорт",
+        "готовый файл",
+        "скачать файл"
+      ],
+      "sourcePrefixes": [
+        "из",
+        "по",
+        "from"
+      ],
+      "sourceFillers": [
+        "файла",
+        "документа",
+        "моего",
+        "загруженного"
+      ],
+      "methods": {
+        "download": "скачать файл",
+        "save-code": "сохранить код",
+        "browser-print": "печать в PDF",
+        "integration": "через редактор",
+        "local-build": "локальная сборка",
+        "web": "показ в сервисе"
+      }
+    }
   },
   "title": "ИИ-навигатор",
   "author": {
@@ -6870,6 +7253,46 @@
     "alice-code-help": {
       "title": "Алиса AI — написание кода в чате",
       "url": "https://alice.yandex.ru/support/ru/assistant/chat/code"
+    },
+    "format-chatgpt-slides": {
+      "title": "ChatGPT Space: создание и экспорт презентаций",
+      "url": "https://learn.chatgpt.com/docs/space/getting-started"
+    },
+    "format-gemini-canvas": {
+      "title": "Gemini Canvas: создание и экспорт слайдов",
+      "url": "https://support.google.com/gemini/answer/16047321?hl=en"
+    },
+    "format-canva-download": {
+      "title": "Canva: форматы скачивания презентаций",
+      "url": "https://www.canva.com/help/download-file-types/"
+    },
+    "format-beautiful-pptx": {
+      "title": "Beautiful.ai: редактируемый PowerPoint",
+      "url": "https://support.beautiful.ai/hc/en-us/articles/360035562031-How-do-I-export-as-an-editable-PowerPoint"
+    },
+    "format-slidesgo-pptx": {
+      "title": "Slidesgo: создание и скачивание PPTX",
+      "url": "https://slidesgo.com/ai/presentation-maker"
+    },
+    "format-manus-slides": {
+      "title": "Manus: презентации и экспорт",
+      "url": "https://manus.im/tools/text-to-slides"
+    },
+    "format-kimi-download": {
+      "title": "Kimi PPT: скачивание и формат PPTX",
+      "url": "https://www.kimi.com/en/help/ppt/ppt-troubleshooting"
+    },
+    "format-openai-presentations": {
+      "title": "OpenAI: создание PowerPoint с плагином Presentations",
+      "url": "https://learn.chatgpt.com/use-cases/generate-slide-decks"
+    },
+    "format-openai-plugins": {
+      "title": "OpenAI: общие плагины ChatGPT и Codex",
+      "url": "https://learn.chatgpt.com/docs/plugins"
+    },
+    "format-beautiful-pdf": {
+      "title": "Beautiful.ai: экспорт PDF",
+      "url": "https://support.beautiful.ai/hc/en-us/articles/115002537392-How-do-I-export-as-a-PDF"
     }
   },
   "regions": {

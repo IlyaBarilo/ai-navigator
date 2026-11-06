@@ -4,10 +4,10 @@ import {prepareRelease} from './prepare-release.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),qa=path.join(root,'local','qa','delivery');await fs.mkdir(qa,{recursive:true});
 const manifest=JSON.parse(await fs.readFile(path.join(root,'PUBLIC-FILES.json'),'utf8'));
 await checkPublicFiles(root);
-for(const name of ['AGENTS.md','.gitignore','local/a.json','docs/AGENTS.md','docs/.gitignore','src/local/data.json','Local/a.txt'])assert(isPrivatePath(name),name);
+for(const name of ['AGENTS.md','.gitignore','local/a.json','src_input/notes.md','docs/src_input/notes.md','docs/AGENTS.md','docs/.gitignore','src/local/data.json','Local/a.txt'])assert(isPrivatePath(name),name);
 assert(!manifest.files.includes('ai-navigator.html'));assert.equal(manifest.buildOutput,'ai-navigator.html');
 const fixture=await fs.mkdtemp(path.join(qa,'boundary-'));
-for(const name of ['AGENTS.md','docs/.gitignore','docs/local/notes.md']){await fs.writeFile(path.join(fixture,'PUBLIC-FILES.json'),JSON.stringify({files:[name]}));await assert.rejects(()=>checkPublicFiles(fixture),/Private path/);}
+for(const name of ['AGENTS.md','docs/.gitignore','docs/local/notes.md','src_input/notes.md']){await fs.writeFile(path.join(fixture,'PUBLIC-FILES.json'),JSON.stringify({files:[name]}));await assert.rejects(()=>checkPublicFiles(fixture),/Private path/);}
 for(const name of ['ai-navigator.html','index.html']){await fs.writeFile(path.join(fixture,'PUBLIC-FILES.json'),JSON.stringify({files:[name]}));await assert.rejects(()=>checkPublicFiles(fixture),/Generated HTML/);}
 for(const tag of ['v1','v0.1','v0.1.0','v0.1.2.3'])assert.equal(releaseVersion(tag),tag.slice(1));
 for(const tag of ['v1\n','1','v1.2.3.4.5','v1-beta',' v1','v1.','v1;echo'])assert.throws(()=>releaseVersion(tag));

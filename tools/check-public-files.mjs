@@ -1,7 +1,7 @@
 // Structural distribution checks; no private policy or pre-existing local directory required.
 import fs from 'node:fs/promises';import path from 'node:path';import crypto from 'node:crypto';import {fileURLToPath} from 'node:url';import {execFileSync} from 'node:child_process';
 const projectRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const privateNames=new Set(['local','agents.md','.gitignore','node_modules','.git','.qa','.codex-tmp']);
+const privateNames=new Set(['local','src_input','agents.md','.gitignore','node_modules','.git','.qa','.codex-tmp']);
 export const isPrivatePath=name=>name.split(/[\\/]/).some(part=>privateNames.has(part.toLowerCase()));
 export const isGeneratedPath=name=>/^(ai-navigator|index)\.html$/i.test(name);
 export function safeFile(root,name){

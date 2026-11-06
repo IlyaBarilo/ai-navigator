@@ -67,6 +67,9 @@ function renderGuided() {
     : P.q.trim()
       ? 'Нейросети не найдены. Дополните описание или выберите другой пример.'
       : 'Напишите задачу или выберите пример, чтобы перейти дальше.';
+  if (count === 0 && simplePlan().presentation.active) {
+    $('#guided-input-hint').textContent = 'Не найден подтверждённый результат: ' + presentationRequestLabel(simplePlan().presentation) + '. Измените формат или условия доступа.';
+  }
   placeGuidedHelp();
 }
 function goGuidedStep(step, { changeAccess = false } = {}) {

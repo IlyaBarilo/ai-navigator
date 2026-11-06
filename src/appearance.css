@@ -810,6 +810,17 @@ html[data-appearance='contrast-grid'] .help-link {
   margin-left: 0;
 }
 
+.delivery-summary {
+  margin: 6px 0 8px;
+  font-size: var(--type-note);
+  line-height: 1.35;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.delivery-summary p { margin: 0; }
+.delivery-summary p + p { margin-top: 3px; }
+.delivery-result, .delivery-summary b { color: var(--ink); }
+.delivery-note { margin: 4px 0 8px; font-size: var(--type-note); line-height: 1.35; color: var(--muted); }
 /* Compact mobile steps keep navigation close to the user's current decision. */
 /* Step headings receive reading focus after navigation, without a control-like outline. */
 body[data-workspace='steps'] :is(#simple-title-1, #simple-title-2, #simple-title-3):focus {
