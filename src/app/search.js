@@ -92,6 +92,15 @@ function presentationRequestLabel(request) {
   const formats = (searchOptions.presentation?.formats || []).filter((f) => request.formats.includes(f.id)).map((f) => f.name);
   return [...formats, ...(request.editable ? ['редактируемый результат'] : []), ...(request.direct ? ['скачивание файла'] : [])].join(' · ');
 }
+function matchesSubjectScope(aliases, plan, toolId, allowEmpty = false) {
+  if (!aliases) return true;
+  if (!plan.query.trim()) return allowEmpty;
+  if (plan.tools.has(toolId) && !plan.tasks.length && !plan.terms.length && !plan.context.length) return true;
+  return aliases.some((alias) => {
+    const words = searchWords(alias);
+    return words.length && words.every((word) => plan.words.includes(word));
+  });
+}
 function searchPlan() {
   if (cachedQuery === S.q) return cachedSearchPlan;
   const words = [...new Set(searchWords(S.q))],
@@ -136,6 +145,8 @@ function searchPlan() {
     : remaining;
   cachedQuery = S.q;
   cachedSearchPlan = {
+    query: S.q,
+    words,
     tasks,
     terms,
     context: remaining.filter((w) => !terms.includes(w)),

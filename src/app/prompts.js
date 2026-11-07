@@ -48,8 +48,12 @@ function renderPrompts(preferredTask) {
     plan = novice ? simplePlan() : searchPlan(),
     inferred = novice && simpleIsTopic(plan) ? [taskMap.get('text')].filter(Boolean) : plan.tasks,
     ids = new Set([...(novice ? [] : S.types), ...inferred.map((task) => task.id)]),
-    items = taskList.filter((task) => ids.has(task.id))
-      .flatMap((task) => (task.prompts || []).map((prompt) => ({task, prompt, key: task.id + '/' + prompt.id}))),
+    items = taskList.flatMap((task) => (task.prompts || []).filter((prompt) => {
+      const bound = prompt.forTools?.find((id) => plan.tools.has(id)), inTask = ids.has(task.id);
+      if (prompt.forTools && !bound && !(inTask && prompt.subjectAliases)) return false;
+      if (!inTask && !(bound && !ids.size)) return false;
+      return matchesSubjectScope(prompt.subjectAliases, plan, bound, false);
+    }).map((prompt) => ({task, prompt, key: task.id + '/' + prompt.id}))),
     signature = JSON.stringify(items.map((item) => item.key));
   if (section.parentElement !== target) target.append(section);
   if (promptWorkspace !== activeWorkspace) {

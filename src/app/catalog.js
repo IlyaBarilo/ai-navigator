@@ -26,6 +26,9 @@ function readCatalog() {
         if (f.displayLabel !== undefined &&
             (typeof f.displayLabel !== 'string' || !f.displayLabel.trim()))
           throw Error('У ' + t.name + ' displayLabel должен быть непустой подписью.');
+        if (f.subjectAliases !== undefined && (!Array.isArray(f.subjectAliases) || !f.subjectAliases.length ||
+            f.subjectAliases.some((s) => typeof s !== 'string' || !s.trim())))
+          throw Error('У ' + t.name + ' subjectAliases должен содержать предметные формулировки.');
         if (f.displayIcon !== undefined &&
             (!/^[a-z0-9-]+$/.test(f.displayIcon) || !document.getElementById('icon-' + f.displayIcon)))
           throw Error('У ' + t.name + ' displayIcon должен обозначать встроенный значок.');
@@ -90,6 +93,12 @@ function readCatalog() {
             throw Error('Неизвестная категория в правиле задачи ' + task.name);
         const keys = new Set();
         for (const example of task.prompts) {
+          if (example.forTools !== undefined && (!Array.isArray(example.forTools) || !example.forTools.length ||
+              example.forTools.some((id) => !D.tools.some((tool) => tool.id === id))))
+            throw Error('Проверьте forTools примера для ' + task.name);
+          if (example.subjectAliases !== undefined && (!Array.isArray(example.subjectAliases) || !example.subjectAliases.length ||
+              example.subjectAliases.some((s) => typeof s !== 'string' || !s.trim())))
+            throw Error('Проверьте subjectAliases примера для ' + task.name);
           if (
             !/^[a-z0-9-]+$/.test(example.id) ||
             keys.has(example.id) ||

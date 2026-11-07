@@ -4,6 +4,7 @@ function matches(t, f) {
   if (S.quality && (f.quality.level === null || f.quality.level < S.quality)) return false;
   if (S.difficulty && f.difficulty.level > S.difficulty) return false;
   const plan = searchPlan();
+  if (!matchesSubjectScope(f.subjectAliases, plan, t.id, !S.types.size)) return false;
   if (!matchesPresentation(f, plan.presentation)) return false;
   if (plan.tools.size && !plan.tools.has(t.id)) return false;
   if (!matchesQueryConditions(f, plan.filters)) return false;
@@ -29,7 +30,7 @@ function taskFunctions(task, eligible) {
   );
 }
 function selectedMatches(t, accept = () => true) {
-  const eligible = t.functions.filter((f) => accept(f) && matches(t, f));
+  const eligible = t.functions.filter((f) => accept(f, t) && matches(t, f));
   const requested = searchPlan().tasks;
   function matchTasks(tasks) {
     const ids = new Set(),

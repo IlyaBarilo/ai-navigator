@@ -46,9 +46,15 @@ function initWorkspace() {
     return params.get('view') || (catalogLink ? 'catalog' : allowedQueryMode);
   };
   setWorkspace(choose(), false);
-  addEventListener('hashchange', () => {
+  const restoreLocation = (fromCache = false) => {
+    if (fromCache || !location.hash) restoreSimplePreferences();
     readSimpleHash();
-    readGuidedStep();
+    if (!location.hash) guidedStep = 1;
+    else readGuidedStep();
     setWorkspace(choose(), false);
+  };
+  addEventListener('hashchange', () => restoreLocation());
+  addEventListener('pageshow', (event) => {
+    if (event.persisted) restoreLocation(true);
   });
 }

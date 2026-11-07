@@ -43,6 +43,11 @@ function saveSimple() {
     localStorage.setItem(SIMPLE_STORAGE_KEY, JSON.stringify(P));
   } catch (_) {}
 }
+function restoreSimplePreferences() {
+  try {
+    applySimple(JSON.parse(localStorage.getItem(SIMPLE_STORAGE_KEY) || '{}'));
+  } catch (_) {}
+}
 function writeSimpleHash() {
   const guided = activeWorkspace === 'steps', params = new URLSearchParams({ view: guided ? 'steps' : 'simple' });
   if (guided && guidedStep > 1) params.set('step', String(guidedStep));
@@ -87,7 +92,8 @@ function simpleVisible({ beforeAccess = false } = {}) {
       topic = simpleIsTopic(plan);
     if (topic) S.q = '';
     return getVisible(
-      (f) => !topic || (f.category === 'text' && matchesQueryConditions(f, plan.filters)),
+      (f, t) => matchesSubjectScope(f.subjectAliases, plan, t.id, !plan.query.trim()) &&
+        (!topic || (f.category === 'text' && matchesQueryConditions(f, plan.filters))),
     );
   });
 }
@@ -208,9 +214,7 @@ function initSimpleExamples() {
   });
 }
 function initSimple() {
-  try {
-    applySimple(JSON.parse(localStorage.getItem(SIMPLE_STORAGE_KEY) || '{}'));
-  } catch (_) {}
+  restoreSimplePreferences();
   readSimpleHash();
   $('#simple-query').addEventListener('input', (e) => {
     P.q = e.target.value.slice(0, 200);
